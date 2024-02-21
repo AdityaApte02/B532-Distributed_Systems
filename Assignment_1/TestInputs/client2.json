@@ -1,0 +1,19 @@
+[
+    {
+        "type": "set",
+        "key": "name",
+        "value": "Aditya",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type": "get", "key": "name", "expected": "END\r\n"},
+    {"type": "get", "key": "lastName", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "lastName",
+        "chunkSize":"1024",
+        "value": "c",
+        "expected": "NOT-STORED\r\n"
+    },
+    {"type": "get", "key": "class", "expected": "END\r\n"}
+]

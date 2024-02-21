@@ -1,0 +1,17 @@
+[
+    {"type":"get", "key": "football", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "cricket",
+        "value": "Kohli",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {
+        "type": "set",
+        "key": "F1",
+        "value": "Verstappen",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    }
+]

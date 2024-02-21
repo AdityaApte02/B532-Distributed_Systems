@@ -1,0 +1,19 @@
+[
+    {
+        "type": "set",
+        "key": "football",
+        "value": "Messi",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type":"get", "key": "cricket", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "F1",
+        "value": "Perez",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type":"get", "key": "F1", "expected": "END\r\n"}
+
+]

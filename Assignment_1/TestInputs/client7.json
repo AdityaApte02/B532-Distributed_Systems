@@ -1,0 +1,19 @@
+[
+    {
+        "type": "set",
+        "key": "football",
+        "value": "Ronaldo",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type":"get", "key": "city", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "football",
+        "value": "Haaland",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type":"get", "key": "F1", "expected": "END\r\n"}
+
+]

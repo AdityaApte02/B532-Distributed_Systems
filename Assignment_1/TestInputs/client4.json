@@ -1,0 +1,18 @@
+[
+    {
+        "type": "set",
+        "key": "name",
+        "value": "Mrunmayi",
+        "chunkSize":"1024",
+        "expected": "NOT-STORED\r\n"
+    },
+    {"type":"get", "key": "school", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "age",
+        "value": "24",
+        "chunkSize":"1024",
+        "expected": "NOT-STORED\r\n"
+    },
+    {"type":"get", "key": "city", "expected": "END\r\n"}
+]

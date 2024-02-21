@@ -1,0 +1,18 @@
+[
+    {
+        "type": "set",
+        "key": "school",
+        "value": "IUB",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {"type": "get", "key": "lastName", "expected": "END\r\n"},
+    {"type": "get", "key": "school", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "class",
+        "chunkSize":"1024",
+        "value": "DistributedSystems",
+        "expected": "NOT-STORED\r\n"
+    }
+]

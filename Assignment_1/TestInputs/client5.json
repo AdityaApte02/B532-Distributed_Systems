@@ -1,0 +1,12 @@
+[
+    {"type":"get", "key": "name", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "age",
+        "value": "23",
+        "chunkSize":"1024",
+        "expected": "NOT-STORED\r\n"
+    },
+    {"type":"get", "key": "city", "expected": "END\r\n"},
+    {"type":"get", "key": "age", "expected": "END\r\n"}
+]

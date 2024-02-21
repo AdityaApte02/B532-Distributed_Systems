@@ -1,0 +1,17 @@
+[
+    {"type":"get", "key": "age", "expected": "END\r\n"},
+    {
+        "type": "set",
+        "key": "city",
+        "value": "Pune",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    },
+    {
+        "type": "set",
+        "key": "age",
+        "value": "21",
+        "chunkSize":"1024",
+        "expected": "STORED\r\n"
+    }
+]
