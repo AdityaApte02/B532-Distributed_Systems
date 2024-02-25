@@ -1,0 +1,21 @@
+[
+    {
+            "pid":"1",
+            "Application_HostName":"localhost",
+            "Application_Receive_port":6000,
+            "Middleware_HostName":"localhost",
+            "Middleware_Application_Receive_port":6001,
+            "Middleware_Network_Receive_port":6002
+        
+    },
+
+    {
+            "pid":"2",
+            "Application_HostName":"localhost",
+            "Application_Receive_port":7000,
+            "Middleware_HostName":"localhost",
+            "Middleware_Application_Receive_port":7001,
+            "Middleware_Network_Receive_port":7002
+        
+    }
+]
