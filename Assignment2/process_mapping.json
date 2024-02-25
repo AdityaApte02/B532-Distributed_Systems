@@ -17,5 +17,15 @@
             "Middleware_Application_Receive_port":7001,
             "Middleware_Network_Receive_port":7002
         
-    }
+    },
+
+    {
+        "pid":"3",
+        "Application_HostName":"localhost",
+        "Application_Receive_port":8000,
+        "Middleware_HostName":"localhost",
+        "Middleware_Application_Receive_port":8001,
+        "Middleware_Network_Receive_port":8002
+    
+}
 ]

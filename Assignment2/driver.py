@@ -4,8 +4,8 @@ import multiprocessing
 from myProcess import MyProcess
 import os
 
-def handle_process(object):
-    process = MyProcess(object)
+def handle_process(object, num_processes):
+    process = MyProcess(object, num_processes)
     print(f"A process with pid {object['pid']} was created")
 
 if __name__ =="__main__":
@@ -18,8 +18,9 @@ if __name__ =="__main__":
     except Exception as e:
         print(e)
 
+    num_processes = len(data)
     for obj in data:
         #spawn the processes
-        process = multiprocessing.Process(target=handle_process, args=(obj, ))
+        process = multiprocessing.Process(target=handle_process, args=(obj, num_processes))
         process.start()
         

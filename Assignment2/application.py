@@ -9,7 +9,8 @@ import string
 
 
 class Application():
-    def __init__(self, pid, host, Application_Middleware_Receive_port, middleware_host, middleware_port):
+    def __init__(self, num_processes, pid, host, Application_Middleware_Receive_port, middleware_host, middleware_port):
+        self.num_processes = num_processes
         self.pid = pid
         self.Application_Hostname = host
         self.Application_Middleware_Receive_port = Application_Middleware_Receive_port
@@ -22,7 +23,7 @@ class Application():
 
     def sendRequestToMiddleware(self):
         while True:
-            time.sleep(10)
+            time.sleep(random.randint(1, 5))
             message = self.messages[self.message_counter] + str(self.pid)
             self.message_counter += 1
             try:
@@ -46,6 +47,9 @@ class Application():
                 data = conn.recv(1024)
                 if not data:
                     break
+                data = data.decode('utf-8')
+                with open('./out'+str(self.pid)+'.txt', 'a') as file:
+                    file.write(data + '\n')
         except Exception as e:
             print(e)
         finally:
