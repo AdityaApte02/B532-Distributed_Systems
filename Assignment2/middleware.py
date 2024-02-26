@@ -7,7 +7,7 @@ from Message import Message
 from acknowldegement import Acknowledgement
 
 class Middleware():
-    def __init__(self, num_processes, pid, Middleware_HostName, Middleware_Application_Receive_port, Middleware_Network_Receive_port, Application_Hostname, Application_Middleware_Receive_port):
+    def __init__(self, num_processes, network_ports_path, pid, Middleware_HostName, Middleware_Application_Receive_port, Middleware_Network_Receive_port, Application_Hostname, Application_Middleware_Receive_port):
         self.num_processes = num_processes
         self.pid = pid
         self.host = Middleware_HostName
@@ -16,6 +16,7 @@ class Middleware():
         self.Application_Hostname = Application_Hostname
         self.Application_Middleware_Receive_port = Application_Middleware_Receive_port
         self.network_ports = {}
+        self.network_ports_path = network_ports_path
         self.queue = []
         self.ack_list = []
         self.ack_dict = {}
@@ -40,7 +41,7 @@ class Middleware():
             
 
     def read_network_ports(self):
-        with open('./network_receive.csv', 'r') as file:
+        with open(self.network_ports_path, 'r') as file:
             reader = csv.reader(file)
             for row in reader:
                 self.network_ports[row[0]] = int(row[1])

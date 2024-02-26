@@ -4,6 +4,7 @@ import json
 import socket
 import threading
 import string
+import os
 
 
 
@@ -19,13 +20,12 @@ class Application():
         self.messages  = list(string.ascii_uppercase)
         self.message_counter = 0
         self.run()
-        
 
     def sendRequestToMiddleware(self):
         while True:
             time.sleep(random.randint(1, 5))
             message = self.messages[self.message_counter] + str(self.pid)
-            self.message_counter += 1
+            self.message_counter = (self.message_counter + 1) % 26
             try:
                 middleware_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 middleware_socket.connect((self.middleware_host, self.middleware_port))
@@ -48,8 +48,9 @@ class Application():
                 if not data:
                     break
                 data = data.decode('utf-8')
-                with open('./out'+str(self.pid)+'.txt', 'a') as file:
+                with open('./Outputs/out'+self.pid+'.txt', 'a') as file:
                     file.write(data + '\n')
+                
         except Exception as e:
             print(e)
         finally:
