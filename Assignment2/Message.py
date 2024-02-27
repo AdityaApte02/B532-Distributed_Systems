@@ -1,5 +1,4 @@
 class Message():
-
     def __init__(self, pid, data_block, clock):
         self.pid = pid
         self.data_block = data_block

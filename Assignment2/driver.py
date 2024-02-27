@@ -4,6 +4,9 @@ import multiprocessing
 from myProcess import MyProcess
 import os
 import shutil
+import time
+import unittest
+from tests import TestOutputFiles
 
 def handle_process(object, num_processes, network_ports_path):
     process = MyProcess(object, num_processes, network_ports_path)
@@ -23,7 +26,6 @@ def removeFiles(folder_path):
         print(f"Error: {e}")
 
 if __name__ =="__main__":
-
     input_folder_path = './TestInputs/'
     for i, subfolder in  enumerate(os.listdir(input_folder_path)):
         subfolder_path = os.path.join(input_folder_path, subfolder)
@@ -37,18 +39,18 @@ if __name__ =="__main__":
                         num_processes = len(data)
                         processes = []
                         for obj in data:
-                            #spawn the processes
                             process = multiprocessing.Process(target=handle_process, args=(obj, num_processes, network_ports_path))
                             process.start()
                             processes.append(process)
 
-
+                        time.sleep(45)
                         for process in processes:
+                            process.terminate()
                             process.join()
 
 
                         outputs_folder = './Outputs/'
-                        test_inputs_folder = './TestInputs/Test'+str(i+1)+'/'
+                        test_inputs_folder = './TestOutputs/Test'+str(i+1)+'/'
                         txt_files = [file for file in os.listdir(outputs_folder) if file.endswith(".txt")]
                         for file_name in txt_files:
                             source_path = os.path.join(outputs_folder, file_name)
@@ -61,9 +63,14 @@ if __name__ =="__main__":
                             except Exception as e:
                                 print(f"Error: {e}")
 
-                            removeFiles('./Outputs/')    
+                        removeFiles('./Outputs/')    
                 except Exception as e:
                     print(e)
 
+    result = unittest.TextTestRunner().run(unittest.TestLoader().loadTestsFromTestCase(TestOutputFiles))
+
+    if result.wasSuccessful():
+        print("All test cases passed.")
     
-        
+    else:
+        print('Some of the test cases failed')

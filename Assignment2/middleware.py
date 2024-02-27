@@ -31,10 +31,9 @@ class Middleware():
                 if self.queue[0].acks >= self.num_processes:
                     self.sendToApplication(self.queue[0].serialize())
                     heapq.heappop(self.queue)
-
                 else:
                     if self.queue[0].hash not in self.ack_dict.keys():
-                        time.sleep(0.4)
+                        time.sleep(1)
                         ackObject = Acknowledgement(self.queue[0].pid, self.queue[0].data_block, self.queue[0].clock)
                         self.sendToNetwork(ackObject.serialize())
                         self.ack_dict[ackObject.hash] = True
@@ -81,7 +80,6 @@ class Middleware():
             for i in range(len(self.ack_list)):
                 ackObj = self.ack_list[i]
                 if messageObj.hash == ackObj.hash:
-                    print('ACK mapped to the MSG')
                     messageObj.acks += 1
                     self.ack_list.pop(i)
                     break
@@ -100,12 +98,12 @@ class Middleware():
                 data = data.decode('utf-8')
                 if data[:3] == 'MSG':
                     messageObj = Message.deserialize(data)
-                    self.clock = max(self.clock, messageObj.clock) + 1
+
+                    #Update the clock by taking max of your timestamp and timestamp of received messgage and incrementing it by 1
+                    self.clock = max(self.clock, messageObj.clock) + 1   
+                    
                     heapq.heapify(self.queue)
                     heapq.heappush(self.queue, messageObj)
-                    print(f"From network {data} at {self.pid}")
-                    print(f"Time of process {self.pid} is {self.clock}")
-
                 else:
                     ackObj = Acknowledgement.deserialize(data)
                     self.ack_list.append(ackObj)
