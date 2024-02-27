@@ -7,8 +7,6 @@ import string
 import os
 
 
-
-
 class Application():
     def __init__(self, num_processes, pid, host, Application_Middleware_Receive_port, middleware_host, middleware_port):
         self.num_processes = num_processes
@@ -19,6 +17,8 @@ class Application():
         self.middleware_port = middleware_port
         self.messages  = list(string.ascii_uppercase)
         self.message_counter = 0
+
+        time.sleep(1)
         self.run()
 
     def sendRequestToMiddleware(self):
@@ -49,8 +49,7 @@ class Application():
                     break
                 data = data.decode('utf-8')
                 with open('./Outputs/out'+self.pid+'.txt', 'a') as file:
-                    file.write(data + '\n')
-                
+                    file.write(data + '\n')         
         except Exception as e:
             print(e)
         finally:

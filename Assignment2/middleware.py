@@ -5,6 +5,7 @@ import time
 import csv
 from Message import Message
 from acknowldegement import Acknowledgement
+import random
 
 class Middleware():
     def __init__(self, num_processes, network_ports_path, pid, Middleware_HostName, Middleware_Application_Receive_port, Middleware_Network_Receive_port, Application_Hostname, Application_Middleware_Receive_port):
@@ -29,11 +30,12 @@ class Middleware():
         while True:
             if len(self.queue) > 0:
                 if self.queue[0].acks >= self.num_processes:
+                    #Deliever the message to the application
                     self.sendToApplication(self.queue[0].serialize())
                     heapq.heappop(self.queue)
                 else:
                     if self.queue[0].hash not in self.ack_dict.keys():
-                        time.sleep(1)
+                        time.sleep(random.randint(3,8))
                         ackObject = Acknowledgement(self.queue[0].pid, self.queue[0].data_block, self.queue[0].clock)
                         self.sendToNetwork(ackObject.serialize())
                         self.ack_dict[ackObject.hash] = True
@@ -84,7 +86,6 @@ class Middleware():
                     self.ack_list.pop(i)
                     break
 
-
     def receiveFromNetwork(self):
         from_network_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -101,7 +102,7 @@ class Middleware():
 
                     #Update the clock by taking max of your timestamp and timestamp of received messgage and incrementing it by 1
                     self.clock = max(self.clock, messageObj.clock) + 1   
-                    
+
                     heapq.heapify(self.queue)
                     heapq.heappush(self.queue, messageObj)
                 else:

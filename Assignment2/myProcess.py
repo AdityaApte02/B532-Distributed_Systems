@@ -4,8 +4,6 @@ import threading
 
 
 class MyProcess():
-
-
     def spawn_Application(self, object, num_processes):
         Application(num_processes, object['pid'], object['Application_HostName'], object['Application_Receive_port'], object['Middleware_HostName'], object['Middleware_Application_Receive_port'])
 
