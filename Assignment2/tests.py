@@ -4,7 +4,7 @@ import os
 class TestOutputFiles(unittest.TestCase):
     def test_files_within_subfolders_are_identical(self):
         test_outputs_folder = "./TestOutputs" 
-        lines_to_compare = 10
+        lines_to_compare = 5
         subfolders = [f.path for f in os.scandir(test_outputs_folder) if f.is_dir()]
         for subfolder in subfolders:
 

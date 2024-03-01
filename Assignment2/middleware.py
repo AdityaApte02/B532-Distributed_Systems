@@ -35,7 +35,7 @@ class Middleware():
                     heapq.heappop(self.queue)
                 else:
                     if self.queue[0].hash not in self.ack_dict.keys():
-                        time.sleep(random.randint(3,8))
+                        time.sleep(random.randint(5,10))
                         ackObject = Acknowledgement(self.queue[0].pid, self.queue[0].data_block, self.queue[0].clock)
                         self.sendToNetwork(ackObject.serialize())
                         self.ack_dict[ackObject.hash] = True
@@ -57,7 +57,7 @@ class Middleware():
                 data = conn.recv(1024)
                 if not data:
                     break
-                self.clock = self.clock + 1
+                self.clock = self.clock + int(self.pid)
                 message = data.decode("utf-8")
                 messageObj = Message(message[1], message[0], self.clock)
                 print('Received a message from Application', messageObj.serialize())
@@ -101,7 +101,7 @@ class Middleware():
                     messageObj = Message.deserialize(data)
 
                     #Update the clock by taking max of your timestamp and timestamp of received messgage and incrementing it by 1
-                    self.clock = max(self.clock, messageObj.clock) + 1   
+                    self.clock = max(self.clock, messageObj.clock) + int(self.pid)
 
                     heapq.heapify(self.queue)
                     heapq.heappush(self.queue, messageObj)

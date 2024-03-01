@@ -1,3 +1,4 @@
 MSG 1 A 2
-MSG 3 A 4
-MSG 4 A 5
+MSG 2 A 4
+MSG 5 A 10
+MSG 5 B 30

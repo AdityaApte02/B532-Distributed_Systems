@@ -43,7 +43,7 @@ if __name__ =="__main__":
                             process.start()
                             processes.append(process)
 
-                        time.sleep(30)
+                        time.sleep(45)
                         for process in processes:
                             process.terminate()
                             process.join()

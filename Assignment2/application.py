@@ -18,7 +18,7 @@ class Application():
         self.messages  = list(string.ascii_uppercase)
         self.message_counter = 0
 
-        time.sleep(1)
+        time.sleep(0.6)
         self.run()
 
     def sendRequestToMiddleware(self):

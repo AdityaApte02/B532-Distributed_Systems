@@ -50,7 +50,7 @@ def receiveFromApplication():
         conn, addr = socket.accept()
         data = conn.receive()
 
-       clock = clock + 1   #Increment the local clock value by 1
+       clock = clock + pid   #Increment the local clock value by the process's pid
        message = Message(data)  #Create the Message Object
        sendToNetwork(message)  #Broadcast the message to all the processes
 
@@ -77,7 +77,7 @@ def receiveFromNetwork():
 
         if type data is MSG:
             msg = Message.deserialize(data)
-            clock = max(clock, msg.clock)   #Update the clock by taking max of local clock and clock of the received message
+            clock = max(clock, msg.clock) + pid  #Update the clock by taking max of local clock and clock of the received message
             queue.push(msg)  #Push the msg into the local queue (priority queue or heap)
 
         else:
