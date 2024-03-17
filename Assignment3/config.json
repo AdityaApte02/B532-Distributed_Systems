@@ -1,0 +1,34 @@
+{
+    "MasterHost":"localhost",
+    "MasterPort":5000,
+    "map_function":"word_count_map",
+    "reduce_function":"word_count_reduce",
+    "mappers":[
+        {
+            "id":"mapper1",
+            "port":8001
+        },
+        {
+            "id":"mapper2",
+            "port":8002
+        },
+        {
+            "id":"mapper3",
+            "port":8003
+        }
+    ],
+    "reducers":[
+        {
+            "id":"reducer1",
+            "port":9001
+        },
+        {
+            "id":"reducer2",
+            "port":9002
+        },
+        {
+            "id":"reducer3",
+            "port":9003
+        }
+    ]
+}
