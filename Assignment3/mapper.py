@@ -4,7 +4,8 @@ import os
 import socket
 from message import PulseMessageMapper
 from message import DoneMessageMapper
-from message import sendToReducerMessage
+from message import SendToReducerMessage
+from message import SendDoneToReducer
 import subprocess
 from map import map_task
 
@@ -132,7 +133,6 @@ class Mapper():
             if hash_val not in shuffled:
                 shuffled[hash_val] = []      
             shuffled[hash_val].append(kv)
-        
         for hash_val, kv in shuffled.items():
             id = "reducer"+str(hash_val+1)
             reducer = self.getReducerbyId(id)
@@ -140,16 +140,32 @@ class Mapper():
                 for key, value in kv:
                     reducer_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     reducer_socket.connect((reducer["host"], reducer["port"]))
-                    send_to_reducer_msg = sendToReducerMessage(self.id, key, value)
+                    send_to_reducer_msg = SendToReducerMessage(self.id, key, value)
                     msg = send_to_reducer_msg.serialize()
                     reducer_socket.send(msg.encode("utf-8"))
+                
             except Exception as e:
                 print(e)
             finally:
                 reducer_socket.close()
-            
                 
-        
+        time.sleep(2)
+        for hash_val, kv in shuffled.items():
+            id = "reducer"+str(hash_val+1)
+            reducer = self.getReducerbyId(id)
+            try:
+                reducer_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                reducer_socket.connect((reducer["host"], reducer["port"]))
+                send_msg  =  SendDoneToReducer(self.id)
+                msg = send_msg.serialize()
+                reducer_socket.send(msg.encode("utf-8"))
+            except Exception as e:
+                print(e)
+                
+            finally:
+                reducer_socket.close()
+            
+                  
     def run(self):
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         thread.start()

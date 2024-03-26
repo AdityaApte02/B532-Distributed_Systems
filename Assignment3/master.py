@@ -39,7 +39,7 @@ class Master():
         return mapper_processes
             
     def handle_reducers(self, reducer_obj):
-        reducer = Reducer(self.host, self.port, reducer_obj["id"], reducer_obj["host"], reducer_obj["port"], self.reduce_function)
+        reducer = Reducer(self.host, self.port, reducer_obj["id"], reducer_obj["host"], reducer_obj["port"], self.reduce_function, self.num_mappers)
         print(f'spawned reducer with id {reducer_obj["id"]}')
             
     def start_reducers(self):

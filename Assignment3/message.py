@@ -49,7 +49,14 @@ class SendToMapperMessage(Message):
         return super().serialize() + s
     
     
-class sendToReducerMessage(Message):
+class SendDoneToReducer(Message):
+    def __init__(self, sender, messageType="DONE_MAPPER_REDUCER"):
+        super().__init__(messageType, sender)
+        
+    def serialize(self):
+        return super().serialize()
+    
+class SendToReducerMessage(Message):
     def __init__(self, id, key, value, messageType="SEND_REDUCER"):
        super().__init__(messageType, id)
        self.key = key
