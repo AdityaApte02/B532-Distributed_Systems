@@ -1,17 +1,11 @@
 import re
 import time
 import sys
-def map_task(text):
+def map_task(text, id):
     cleaned_text = re.sub(r'[^\w\s]', '', text)
     lines = cleaned_text.split(" ")
     for word in lines:
         print(word,"\t1")
-    # word_counts = {}
-    # words = cleaned_text.split()
-    # for word in words:
-    #     word_counts[word] = word_counts.get(word, 0) + 1
-        
-    # return word_counts
 
 if __name__ == '__main__':
     data = sys.stdin.read()

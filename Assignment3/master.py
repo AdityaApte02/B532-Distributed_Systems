@@ -74,6 +74,10 @@ class Master():
                 elif msg_str_list[0] == "DONE_M":
                     mapper_id = msg_str_list[1]
                     self.track_mappers[mapper_id] = True
+                    
+                elif msg_str_list[0] == "DONE_R":
+                    reducer_id = msg_str_list[1]
+                    self.track_reducers[reducer_id] = True
         except Exception as e:
             print(e)
         finally:
@@ -126,6 +130,8 @@ class Master():
                     self.reducersDone = False  
             if self.reducersDone:
                 print("All reducers are done reducing")
+                print('Terminating MapReduce')
+                exit(0)
                 
             
     def checkPulseMappers(self):

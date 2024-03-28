@@ -36,6 +36,14 @@ class DoneMessageMapper(Message):
     def serialize(self):
         return super().serialize()
     
+
+class DoneMessageReducer(Message):
+    def __init__(self, sender, messageType = "DONE_R"):
+        super().__init__(messageType, sender)
+        
+    def serialize(self):
+        return super().serialize()
+    
     
 class SendToMapperMessage(Message):
     def __init__(self, reducer, messageType="SEND_MAPPER", sender="MASTER"):
