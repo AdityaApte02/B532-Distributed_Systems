@@ -57,6 +57,14 @@ class SendToMapperMessage(Message):
         return super().serialize() + s
     
     
+class Terminate(Message):
+    def __init__(self, sender="MASTER", messageType="TERMINATE"):
+        super().__init__(messageType, sender)
+        
+    def serialize(self):
+        return super().serialize()
+    
+    
 class SendDoneToReducer(Message):
     def __init__(self, sender, messageType="DONE_MAPPER_REDUCER"):
         super().__init__(messageType, sender)

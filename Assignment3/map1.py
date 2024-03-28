@@ -9,4 +9,4 @@ def map_task(text, id):
 
 if __name__ == '__main__':
     data = sys.stdin.read()
-    map_task(data)
+    map_task(data, sys.argv[1])

@@ -1,5 +1,6 @@
 import threading
 import time
+import sys
 import os
 import socket
 from message import PulseMessageMapper
@@ -7,6 +8,7 @@ from message import DoneMessageMapper
 from message import SendToReducerMessage
 from message import SendDoneToReducer
 import subprocess
+import signal
 
 class Mapper():
     def __init__(self, masterHost, masterPort, id, host, port, map_func, num_reducers):
@@ -18,11 +20,12 @@ class Mapper():
         self.map_func = map_func
         self.PULSE_INTERVAL = 5
         self.map_path = os.path.join(os.getcwd(), self.map_func)
-        self.input_path = os.path.join(os.getcwd(), "home",str(self.id),"input.txt")
-        self.output_path = os.path.join(os.getcwd(),"home",str(self.id),"output.txt")
+        self.input_path = os.path.join(os.getcwd(), "home", "mappers",str(self.id),"input.txt")
+        self.output_path = os.path.join(os.getcwd(),"home", "mappers",str(self.id),"output.txt")
         self.reducers = []
         self.send = False
         self.num_reducers = num_reducers
+        self.end = False
         self.run()
         
         
@@ -31,6 +34,8 @@ class Mapper():
         Send the pulse signal to the Master
         '''
         while True:
+            if self.end:
+                break
             time.sleep(self.PULSE_INTERVAL)
             pulse_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             pulse_socket.connect((self.masterHost, self.masterPort))
@@ -57,7 +62,6 @@ class Mapper():
             done_socket.send(msg.encode("utf-8"))
         except Exception as e:
             print(e)
-            
         finally:
                 done_socket.close()
                 
@@ -73,27 +77,37 @@ class Mapper():
             master_socket.bind((self.host, self.port))
             master_socket.listen(1)
             while True:
+                if self.end:
+                    break
                 conn, address = master_socket.accept()
                 data = conn.recv(1024)
                 if not data:
                     break
                 data = data.decode('utf-8')
                 msg = data.split(" ")
-                reducer = {
-                    "id":msg[2],
-                    "host":msg[3],
-                    "port":int(msg[4])
-                }
-                self.reducers.append(reducer)
-                if len(self.reducers) == self.num_reducers:
-                    self.send = True
-                    self.sendData()
+                if msg[0] == "TERMINATE":
+                    self.terminate()
+                elif msg[0] == "SEND_MAPPER":
+                    reducer = {
+                        "id":msg[2],
+                        "host":msg[3],
+                        "port":int(msg[4])
+                    }
+                    self.reducers.append(reducer)
+                    if len(self.reducers) == self.num_reducers:
+                        self.send = True
+                        self.sendData()
                 
         except Exception as e:
             print(e)
         finally:
             master_socket.close()
           
+          
+    def terminate(self):
+        print('Terminating Mapper '+self.id)
+        self.end = True
+        os.kill(os.getpid(), signal.SIGINT)
 
     def execute(self):
         '''
@@ -110,19 +124,21 @@ class Mapper():
         for reducer in self.reducers:
             if reducer.get('id') == id:
                 return reducer
-        return None  
+        return None
       
+    def computeHash(self,str1):
+        return ord(str1[0])
       
     def sendData(self):
         with open(self.output_path, 'r') as file:
             for line in file:
                 if len(line.strip().split('\t')) == 2:
                     word, count = line.strip().split('\t')
-                    hash_val = hash(word) % self.num_reducers
+                    hash_val = self.computeHash(word) % self.num_reducers
                     id = "reducer"+str(hash_val+1)
                     reducer = self.getReducerbyId(id)
                     self.sendToReducer(reducer["host"], reducer["port"], "SendToReducerMessage", word, count)
-                    
+        
         time.sleep(2)
         for reducer in self.reducers:
             self.sendToReducer(reducer["host"], reducer["port"], "SendDoneToReducer")
@@ -139,8 +155,7 @@ class Mapper():
             if msgType == "SendToReducerMessage":
                 send_to_reducer_msg = SendToReducerMessage(self.id, key, value)
                 msg = send_to_reducer_msg.serialize()
-                reducer_socket.send(msg.encode("utf-8"))
-                
+                reducer_socket.send(msg.encode("utf-8"))      
             elif msgType == "SendDoneToReducer":
                 send_done_msg = SendDoneToReducer(self.id)
                 msg = send_done_msg.serialize()

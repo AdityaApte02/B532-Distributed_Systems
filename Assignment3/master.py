@@ -2,9 +2,14 @@ import multiprocessing
 from mapper import Mapper
 import socket
 import threading
+import sys
+import os
 import time
+import signal
 from reducer import Reducer
 from message import SendToMapperMessage
+from message import Terminate
+from combiner import combine
 
 class Master():
     def __init__(self, host, port, mappers, reducers, map_function, reduce_function):
@@ -22,6 +27,7 @@ class Master():
         self.reducer_pulse_times = {}
         self.track_reducers = {}
         self.reducersDone = False
+        self.end = False
         self.TIMEOUT = 10
         
         
@@ -57,6 +63,8 @@ class Master():
             mapper_pulse_socket.bind((self.host, self.port))
             mapper_pulse_socket.listen(1)
             while True:
+                if self.end:
+                    break
                 conn, address = mapper_pulse_socket.accept()
                 data = conn.recv(1024)
                 if not data:
@@ -131,11 +139,111 @@ class Master():
             if self.reducersDone:
                 print("All reducers are done reducing")
                 print('Terminating MapReduce')
-                exit(0)
+                self.terminate()
+            
+    def sendTerminate(self):
+        for i in range(len(self.mappers)):
+            send_terminate_mapper = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            send_terminate_mapper.connect((self.mappers[i]["host"], self.mappers[i]["port"]))
+            try:
+                terminate = Terminate()
+                msg = terminate.serialize()
+                send_terminate_mapper.send(msg.encode("utf-8"))
+            except Exception as e:
+                print(e)
+            finally:
+                send_terminate_mapper.close()          
                 
+        time.sleep(1)
+                
+        for i in range(len(self.reducers)):
+            send_terminate_reducer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            send_terminate_reducer.connect((self.reducers[i]["host"], self.reducers[i]["port"]))
+            try:
+                terminate = Terminate()
+                msg = terminate.serialize()
+                send_terminate_reducer.send(msg.encode("utf-8"))
+            except Exception as e:
+                print(e)
+            finally:
+                send_terminate_reducer.close()
+                
+                
+    def terminate(self):
+        self.sendTerminate()
+        time.sleep(3)
+        combine('./home/reducers', './combinedOutput.txt')
+        time.sleep(2)
+        self.cleanUp()
+        print('Terminating the Master')
+        self.end = True
+        time.sleep(2)
+        os.kill(os.getpid(), signal.SIGINT)
+    
+    def cleanUp(self):
+        home_directory = "./home"
+        for dir_name in os.listdir(home_directory):
+            cur_dir = os.path.join(home_directory, dir_name)
+            for directory_name in os.listdir(cur_dir):
+                directory_path = os.path.join(cur_dir, directory_name)
+                if os.path.isdir(directory_path):  
+                    if "mapper" in directory_name :
+                        output_file_path = os.path.join(directory_path, "output.txt")
+                        if os.path.exists(output_file_path): 
+                            os.remove(output_file_path)  
+                            
+                    elif "reducer" in directory_name:
+                        input_file_path = os.path.join(directory_path, "input.txt")
+                        if os.path.exists(input_file_path):  
+                            os.remove(input_file_path) 
+                        
+                        output_file_path = os.path.join(directory_path, "output.txt")
+                        if os.path.exists(output_file_path):  
+                            os.remove(output_file_path)  
+        print("Files deleted successfully.")
+            
+            
+    def createFiles(self):
+        home_dir = 'home'
+        map_dir = os.path.join(home_dir, "mappers")
+        if not os.path.exists(map_dir):
+            os.makedirs(map_dir)
+            
+        red_dir = os.path.join(home_dir, "reducers")
+        if not os.path.exists(red_dir):
+            os.makedirs(red_dir)
+            
+            
+        for i in range(1, self.num_mappers + 1):
+            mapper_dir = os.path.join(map_dir, f'mapper{i}')
+            output_file_path = os.path.join(mapper_dir, 'output.txt')
+            
+            if not os.path.exists(mapper_dir):
+                os.makedirs(mapper_dir)
+            
+            with open(output_file_path, 'w') as output_file:
+                output_file.write('')
+                
+                
+        for i in range(1, self.num_reducers + 1):
+            reducer_dir = os.path.join(red_dir, f'reducer{i}')
+            
+            if not os.path.exists(reducer_dir):
+                os.makedirs(reducer_dir)
+                
+            input_file_path = os.path.join(reducer_dir, 'input.txt')
+            with open(input_file_path, 'w') as input_file:
+                input_file.write('')
+                
+            output_file_path = os.path.join(reducer_dir, 'output.txt')
+            with open(output_file_path, 'w') as output_file:
+                output_file.write('')
+
             
     def checkPulseMappers(self):
         while True:
+            if self.end:
+                break
             current_time = time.time()
             for mapper_id, last_pulse_time in self.mapper_pulse_times.items():
                 if current_time - last_pulse_time > self.TIMEOUT:
@@ -148,6 +256,8 @@ class Master():
             
     def checkPulseReducers(self):
         while True:
+            if self.end:
+                break
             current_time = time.time()
             for reducer_id, last_pulse_time in self.reducer_pulse_times.items():
                 if current_time - last_pulse_time > self.TIMEOUT:
@@ -170,6 +280,7 @@ class Master():
         '''
     
     def run(self):
+        self.createFiles()
         for mapper in self.mappers:
             self.track_mappers[mapper["id"]] = False
             
