@@ -1,8 +1,8 @@
 {
     "MasterHost":"localhost",
     "MasterPort":5000,
-    "map_function":"map2.py",
-    "reduce_function":"reduce2.py",
+    "map_function":"map.py",
+    "reduce_function":"reduce.py",
     "mappers":[
         {
             "id":"mapper1",

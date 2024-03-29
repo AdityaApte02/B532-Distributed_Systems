@@ -11,7 +11,8 @@ import subprocess
 import signal
 
 class Mapper():
-    def __init__(self, masterHost, masterPort, id, host, port, map_func, num_reducers):
+    def __init__(self, masterHost, masterPort, id, host, port, map_func, num_reducers, test):
+        self.testCase = test
         self.masterHost = masterHost
         self.masterPort = masterPort
         self.id = id
@@ -19,9 +20,9 @@ class Mapper():
         self.port = port
         self.map_func = map_func
         self.PULSE_INTERVAL = 5
-        self.map_path = os.path.join(os.getcwd(), self.map_func)
-        self.input_path = os.path.join(os.getcwd(), "home", "mappers",str(self.id),"input.txt")
-        self.output_path = os.path.join(os.getcwd(),"home", "mappers",str(self.id),"output.txt")
+        self.map_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.map_func)
+        self.input_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home", "mappers",str(self.id),"input.txt")
+        self.output_path = os.path.join(os.getcwd(),f"tests/{self.testCase}/home", "mappers",str(self.id),"output.txt")
         self.reducers = []
         self.send = False
         self.num_reducers = num_reducers

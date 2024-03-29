@@ -9,7 +9,8 @@ import subprocess
 import signal
 
 class Reducer():
-    def __init__(self, masterHost, masterPort, id, host, port, reduce_func, num_mappers):
+    def __init__(self, masterHost, masterPort, id, host, port, reduce_func, num_mappers, test):
+        self.testCase = test
         self.masterHost = masterHost
         self.masterPort = masterPort
         self.id = id
@@ -18,9 +19,9 @@ class Reducer():
         self.reduce_func = reduce_func
         self.PULSE_INTERVAL = 5
         self.num_mappers = num_mappers
-        self.input_path = os.path.join(os.getcwd(), "home","reducers",str(self.id),"input.txt")
-        self.output_path = os.path.join(os.getcwd(), "home","reducers",str(self.id),"output.txt")
-        self.reduce_path = os.path.join(os.getcwd(), self.reduce_func)
+        self.input_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"input.txt")
+        self.output_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"output.txt")
+        self.reduce_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.reduce_func)
         self.mapper_dict = {}
         self.end = False
         self.run()
@@ -66,7 +67,6 @@ class Reducer():
                 elif msg == "SEND_REDUCER":
                     key = msg_list[2]
                     value = msg_list[3]
-                    print("key",key, " ", "value", value)
                     with open(self.input_path , 'a') as file:
                         file.write(key+'\t'+value+'\n')
                 elif msg == "TERMINATE":
