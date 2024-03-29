@@ -1,8 +1,10 @@
-class Message():
+from abc import ABC, abstractmethod
+class Message(ABC):
     def __init__(self, messageType, sender):
         self.messageType = messageType
         self.sender = sender
         
+    @abstractmethod
     def serialize(self):
         return self.messageType + " " + self.sender
     

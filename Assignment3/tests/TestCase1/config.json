@@ -3,6 +3,7 @@
     "MasterPort":5000,
     "map_function":"map.py",
     "reduce_function":"reduce.py",
+    "clear":"FALSE",
     "mappers":[
         {
             "id":"mapper1",

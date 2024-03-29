@@ -12,7 +12,7 @@ from message import Terminate
 import processing
 
 class Master():
-    def __init__(self, host, port, mappers, reducers, map_function, reduce_function, test):
+    def __init__(self, host, port, mappers, reducers, map_function, reduce_function, test, clear):
         self.host = host
         self.port = port
         self.num_mappers = len(mappers)
@@ -29,6 +29,7 @@ class Master():
         self.reducersDone = False
         self.end = False
         self.testCase = test
+        self.clear = clear
         self.TIMEOUT = 10
         
         
@@ -173,7 +174,8 @@ class Master():
         time.sleep(3)
         processing.combine(f'tests/{self.testCase}/home/reducers', f'tests/{self.testCase}/combinedOutput.txt')
         time.sleep(2)
-        processing.cleanUp(self.testCase)
+        if self.clear == "TRUE":
+            processing.cleanUp(self.testCase)
         print('Terminating the Master')
         self.end = True
         time.sleep(4)
