@@ -1,6 +1,7 @@
 import threading
 import time
 import sys
+import json
 import socket
 import os
 from message import PulseMessageReducer
@@ -45,7 +46,6 @@ class Reducer():
             finally:
                 pulse_socket.close()
                 
-                
     def listen(self):
         mapper_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -58,19 +58,19 @@ class Reducer():
                 data = conn.recv(1024)
                 if not data:
                     break
-                data = data.decode("utf-8")
-                msg_list = data.split(" ")
+                msgdata = data.decode("utf-8")
+                msg_list = msgdata.split(" ")
                 mapper_id = msg_list[1]
                 msg = msg_list[0]
                 if msg == "DONE_MAPPER_REDUCER":
                     self.mapper_dict[mapper_id] = True  
-                elif msg == "SEND_REDUCER":
+                elif msg == "TERMINATE":
+                    self.terminate()   
+                else:
                     key = msg_list[2]
                     value = msg_list[3]
                     with open(self.input_path , 'a') as file:
                         file.write(key+'\t'+value+'\n')
-                elif msg == "TERMINATE":
-                    self.terminate()
         except Exception as e:
             print(e)
         finally:
@@ -110,7 +110,6 @@ class Reducer():
             if self.mapper_dict[mapper] == False:
                 flag = False
                 break
-            
         if flag:
             print('Start Reducing')
             time.sleep(3)

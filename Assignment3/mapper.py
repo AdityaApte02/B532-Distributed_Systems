@@ -7,6 +7,8 @@ from message import PulseMessageMapper
 from message import DoneMessageMapper
 from message import SendToReducerMessage
 from message import SendDoneToReducer
+from collections import defaultdict
+import json
 import subprocess
 import signal
 
@@ -131,14 +133,19 @@ class Mapper():
         return ord(str1[0])
       
     def sendData(self):
+        shuffled_data = defaultdict(list)
         with open(self.output_path, 'r') as file:
             for line in file:
                 if len(line.strip().split('\t')) == 2:
                     word, count = line.strip().split('\t')
-                    hash_val = self.computeHash(word) % self.num_reducers
-                    id = "reducer"+str(hash_val+1)
-                    reducer = self.getReducerbyId(id)
-                    self.sendToReducer(reducer["host"], reducer["port"], "SendToReducerMessage", word, count)
+                    shuffled_data[word].append(count)
+                    
+        sorted_keys = sorted(shuffled_data.keys())
+        for key in sorted_keys:
+            hash_val = self.computeHash(key) % self.num_reducers
+            id = "reducer"+str(hash_val+1)
+            reducer = self.getReducerbyId(id)
+            self.sendToReducer(reducer["host"], reducer["port"], "SendToReducerMessage", key, shuffled_data[key])
         
         time.sleep(2)
         for reducer in self.reducers:
@@ -146,7 +153,7 @@ class Mapper():
             
                     
         
-    def sendToReducer(self, host, port, msgType, key=None, value=None):
+    def sendToReducer(self, host, port, msgType, key=None, values=None):
         '''
         Apply the hash function and send the data to the reducer.
         '''
@@ -154,14 +161,14 @@ class Mapper():
         reducer_socket.connect((host, port))
         try:
             if msgType == "SendToReducerMessage":
-                send_to_reducer_msg = SendToReducerMessage(self.id, key, value)
+                send_to_reducer_msg = SendToReducerMessage(self.id, key, values)
                 msg = send_to_reducer_msg.serialize()
+                print('msg',msg)
                 reducer_socket.send(msg.encode("utf-8"))      
             elif msgType == "SendDoneToReducer":
                 send_done_msg = SendDoneToReducer(self.id)
                 msg = send_done_msg.serialize()
                 reducer_socket.send(msg.encode("utf-8"))
-                
         except Exception as e:
             print(e)
         finally:
