@@ -79,11 +79,6 @@ class SendToReducerMessage(Message):
         super().__init__(messageType, id)
         self.key = key
         self.value = values
-        # if all(isinstance(x, int) for x in values):
-        #     self.value = sum(values)
-            
-        # else:
-        #     self.value = values[0]
         
     def serialize(self):
         s = self.key + str(self.value)
