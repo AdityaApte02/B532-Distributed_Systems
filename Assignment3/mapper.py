@@ -203,16 +203,17 @@ class Mapper():
             with open(path, 'w') as file:
                 json.dump(data, file, indent=4)
             os.kill(os.getpid(), signal.SIGINT)
-            
-    def createOutputBuffer(self):
-        if os.path.exists(self.output_path):
-            self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"output1.txt")
-        with open(self.output_path,"w") as file:
-            pass 
+        
+    def clearOutputBuffer(self):
+        try:
+            with open(self.output_path, 'w') as file:
+                pass
+        finally:
+            file.close()
             
     def run(self):
         print(f'spawned mapper with id {self.id}')
-        self.createOutputBuffer()
+        self.clearOutputBuffer()
         self.readConfig()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         listenthread = threading.Thread(target=self.listenFromMaster, args=())

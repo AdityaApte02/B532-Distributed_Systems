@@ -51,7 +51,6 @@ class Reducer():
                 
     def listen(self):
         mapper_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        t_count = 0
         try:
             mapper_socket.bind((self.host, self.port))
             mapper_socket.listen(10)
@@ -67,11 +66,10 @@ class Reducer():
                 mapper_id = msg_list[1]
                 msg = msg_list[0]
                 if msg == "DONE_MAPPER_REDUCER":
+                    print(f'{mapper_id} is Done sending the Data')
                     self.mapper_dict[mapper_id] = True  
                 elif msg == "TERMINATE":
                     self.terminate()   
-                    t_count+=1
-                    print('> Terminate count:',t_count)
                 else:
                     key = msg_list[2]
                     start_index = msgdata.find('[')
@@ -99,7 +97,7 @@ class Reducer():
             
     
     def terminate(self):
-        print('Terminating Reducer ', self.id)
+        print('Terminating Reducer',self.id)
         self.end = True
         os.kill(os.getpid(), signal.SIGINT)
     
@@ -121,41 +119,35 @@ class Reducer():
             if self.end:
                 break
             self.mappersDone = all(self.mapper_dict[mapper] for mapper in self.mapper_dict)
-            print(list(self.mapper_dict.items()))
-            print("Mappers Done Check", self.mappersDone)
             if self.mappersDone:
                 print('Start Reducing')
                 time.sleep(1)
                 code = self.execute()
-                print("code", code)
                 print('Done Executing')
                 if code == 0:
                     time.sleep(1)
                     self.sendDoneToMaster()
-                
-            
-    def createOutputBuffer(self):
-        if os.path.exists(self.output_path):
-             self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"output1.txt")
-        if os.path.exists(self.input_path):
-            self.input_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"input1.txt")
-           
-        with open(self.input_path,"w") as file:
-            pass 
-        with open(self.output_path,"w") as file:
-            pass 
-                
+            else:
+                time.sleep(1)
+        
+    def clearOutputBuffer(self):
+        with open(self.input_path, 'w') as file:
+            pass
+        with open(self.output_path, 'w') as file:
+            pass
         
     def run(self):
         print(f'spawned reducer with id {self.id}')
-        self.createOutputBuffer()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         thread.start()
+        
+        self.clearOutputBuffer()
         
         listenThread = threading.Thread(target=self.listen,args=())
         listenThread.start()
         
         checkMapperThread = threading.Thread(target=self.checkMappers, args=())
         checkMapperThread.start()
+        
         
         

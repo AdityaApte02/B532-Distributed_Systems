@@ -48,9 +48,7 @@ class Master():
         
         
     def start_mappers(self):
-        mapper_processes = []
         for i in range(len(self.mappers)):
-            print("> Starting mappers")
             process = multiprocessing.Process(target=self.handle_mappers, args=(self.mappers[i], ))
             process.start()
             
@@ -138,7 +136,6 @@ class Master():
                 
     def checkReducers(self):
         while not self.reducersDone:
-            # print(list(self.track_reducers.items()))
             for reducer in self.track_reducers.keys():
                 if self.track_reducers[reducer] == True:
                     self.reducersDone = True    
@@ -196,7 +193,6 @@ class Master():
                 break
             for mapper_id, last_pulse_time in self.mapper_pulse_times.items():
                 current_time = datetime.now().timestamp()
-                print(self.mapper_pulse_times,current_time)
                 if abs(current_time - last_pulse_time) > self.TIMEOUT:
                     self.track_mappers[mapper_id] = False
                     self.mappersDone = False
@@ -214,8 +210,8 @@ class Master():
                 break
             for reducer_id, last_pulse_time in self.reducer_pulse_times.items():
                 current_time =  datetime.now().timestamp()
-                if current_time - last_pulse_time > self.TIMEOUT:
-                    print(f"Terminating Reducer with id {reducer_id}")
+                if abs(current_time - last_pulse_time) > self.TIMEOUT:
+                    print(f"Terminating Reducer with id{reducer_id}")
                     self.killReducer()  
                 else:
                     print(f'Pulse from {reducer_id}')
