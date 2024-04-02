@@ -18,7 +18,7 @@ class Reducer():
         self.host = host
         self.port = port
         self.reduce_func = reduce_func
-        self.PULSE_INTERVAL = 5
+        self.PULSE_INTERVAL = 0.5
         self.num_mappers = num_mappers
         self.input_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"input.txt")
         self.output_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"output.txt")
@@ -48,6 +48,7 @@ class Reducer():
                 
     def listen(self):
         mapper_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        t_count = 0
         try:
             mapper_socket.bind((self.host, self.port))
             mapper_socket.listen(10)
@@ -66,6 +67,8 @@ class Reducer():
                     self.mapper_dict[mapper_id] = True  
                 elif msg == "TERMINATE":
                     self.terminate()   
+                    t_count+=1
+                    print('> Terminate count:',t_count)
                 else:
                     key = msg_list[2]
                     value = msg_list[3]
@@ -116,9 +119,22 @@ class Reducer():
             self.execute()
             time.sleep(1)
             self.sendDoneToMaster()
+            
+            
+    def createOutputBuffer(self):
+        if os.path.exists(self.output_path):
+            self.input_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"input1.txt")
+            self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"output1.txt")
+            
+        with open(self.input_path,"w") as file:
+            pass 
+            
+        with open(self.output_path,"w") as file:
+            pass 
                 
         
     def run(self):
+        self.createOutputBuffer()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         thread.start()
         

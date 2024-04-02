@@ -76,11 +76,24 @@ class SendDoneToReducer(Message):
     
 class SendToReducerMessage(Message):
     def __init__(self, id, key, values, messageType="SEND_REDUCER"):
-       super().__init__(messageType, id)
-       self.key = key
-       self.value = sum(list(map(int, values)))
+        super().__init__(messageType, id)
+        self.key = key
+        if all(isinstance(x, int) for x in values):
+            self.value = sum(values)
+            
+        else:
+            self.value = values[0]
         
     def serialize(self):
         s = self.key + str(self.value)
         return super().serialize() + " " + s
+    
+    
+class ClearMessage(Message):
+    def __init__(self, messageType, sender = "MASTER"):
+        super().__init__(messageType, sender)
+        
+        
+    def serialize(self):
+        return super().serialize()
     

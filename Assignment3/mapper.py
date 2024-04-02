@@ -3,6 +3,7 @@ import time
 import sys
 import os
 import socket
+import random
 from message import PulseMessageMapper
 from message import DoneMessageMapper
 from message import SendToReducerMessage
@@ -21,10 +22,12 @@ class Mapper():
         self.host = host
         self.port = port
         self.map_func = map_func
-        self.PULSE_INTERVAL = 5
+        self.PULSE_INTERVAL = 0.5
+        self.kill = False
         self.map_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.map_func)
-        self.input_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home", "mappers",str(self.id),"input.txt")
-        self.output_path = os.path.join(os.getcwd(),f"tests/{self.testCase}/home", "mappers",str(self.id),"output.txt")
+        self.input_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"input.txt")
+        self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"output.txt")
+        
         self.reducers = []
         self.send = False
         self.num_reducers = num_reducers
@@ -88,8 +91,13 @@ class Mapper():
                     break
                 data = data.decode('utf-8')
                 msg = data.split(" ")
-                if msg[0] == "TERMINATE":
-                    self.terminate()
+                if msg[0] == "CLEAR_MAPPER":
+                    with open(self.output_path, 'w') as file:
+                        file.truncate(0)
+                    self.execute()
+                elif msg[0] == "TERMINATE":
+                    self.end = True
+                    break
                 elif msg[0] == "SEND_MAPPER":
                     reducer = {
                         "id":msg[2],
@@ -100,6 +108,7 @@ class Mapper():
                     if len(self.reducers) == self.num_reducers:
                         self.send = True
                         self.sendData()
+            self.terminate()
                 
         except Exception as e:
             print(e)
@@ -131,6 +140,13 @@ class Mapper():
       
     def computeHash(self,str1):
         return ord(str1[0])
+    
+    
+    def convert_to_int_or_str(self, s):
+        try:
+            return int(s)
+        except ValueError:
+            return s
       
     def sendData(self):
         shuffled_data = defaultdict(list)
@@ -138,7 +154,7 @@ class Mapper():
             for line in file:
                 if len(line.strip().split('\t')) == 2:
                     word, count = line.strip().split('\t')
-                    shuffled_data[word].append(count)
+                    shuffled_data[word].append(self.convert_to_int_or_str(count))
                     
         sorted_keys = sorted(shuffled_data.keys())
         for key in sorted_keys:
@@ -163,7 +179,6 @@ class Mapper():
             if msgType == "SendToReducerMessage":
                 send_to_reducer_msg = SendToReducerMessage(self.id, key, values)
                 msg = send_to_reducer_msg.serialize()
-                print('msg',msg)
                 reducer_socket.send(msg.encode("utf-8"))      
             elif msgType == "SendDoneToReducer":
                 send_done_msg = SendDoneToReducer(self.id)
@@ -174,16 +189,47 @@ class Mapper():
         finally:
             reducer_socket.close()
             
-                  
+                    
+    def readConfig(self):
+        home_dir = f'./tests/{self.testCase}/home/mappers'
+        config_path = os.path.join(home_dir, self.id, "config.json")
+        with open(config_path, 'r') as file:
+            data = json.load(file)
+            if data["kill"] == "TRUE":
+                self.kill = True
+                killThread = threading.Thread(target=self.checkKill, args=())
+                killThread.start()
+                
+                
+    def checkKill(self):
+        print('in CheckKill')
+        if self.kill:
+            self.end = True
+            path = os.path.join(f"tests/{self.testCase}/home", "mappers",str(self.id), 'config.json')
+            with open(path, 'r') as file:
+                data = json.load(file)
+            data['kill'] = 'FALSE'
+            with open(path, 'w') as file:
+                json.dump(data, file, indent=4)
+            os.kill(os.getpid(), signal.SIGINT)
+            
+    def createOutputBuffer(self):
+        if os.path.exists(self.output_path):
+            self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"output1.txt")
+        with open(self.output_path,"w") as file:
+            pass 
+            
     def run(self):
+        self.createOutputBuffer()
+        self.readConfig()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
+        listenthread = threading.Thread(target=self.listenFromMaster, args=())
         thread.start()
+        listenthread.start()
         
         self.execute()
         
         self.sendDoneToMaster()
-        listenthread = threading.Thread(target=self.listenFromMaster, args=())
-        listenthread.start()
         
     
         

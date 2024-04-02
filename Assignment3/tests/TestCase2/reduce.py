@@ -11,7 +11,6 @@ def reduce_task(text):
                 if document not in word_dict[word]:
                     word_dict[word].append(document)
                 
-                
     for word in word_dict.keys():
         print(word, "\t", word_dict[word])
         
