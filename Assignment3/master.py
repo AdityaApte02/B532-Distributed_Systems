@@ -32,7 +32,7 @@ class Master():
         self.end = False
         self.testCase = test
         self.clear = clear
-        self.TIMEOUT = 1
+        self.TIMEOUT = 2
         
         for mapper in self.mappers:
             self.mapper_pulse_times[mapper["id"]] = datetime.now().timestamp()
@@ -50,25 +50,20 @@ class Master():
     def start_mappers(self):
         mapper_processes = []
         for i in range(len(self.mappers)):
+            print("> Starting mappers")
             process = multiprocessing.Process(target=self.handle_mappers, args=(self.mappers[i], ))
             process.start()
-            mapper_processes.append(process)
             
-        return mapper_processes
             
     def handle_reducers(self, reducer_obj):
         reducer = Reducer(self.host, self.port, reducer_obj["id"], reducer_obj["host"], reducer_obj["port"], self.reduce_function, self.num_mappers, self.testCase)
         print(f'spawned reducer with id {reducer_obj["id"]}')
             
     def start_reducers(self):
-        reducer_processes = []
         for i in range(len(self.reducers)):
             process = multiprocessing.Process(target=self.handle_reducers, args=(self.reducers[i], ))
             process.start()
-            reducer_processes.append(process)
-            
-        return reducer_processes
-            
+                        
     def listen(self):
         mapper_pulse_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -126,7 +121,6 @@ class Master():
         Send a message to mappers to send data to the Reducers
         '''
         print('Sending data to mapper')
-        # time.sleep(5)
         if self.mappersDone:
             for i in range(len(self.mappers)):
                 for j in range(len(self.reducers)):
@@ -185,9 +179,7 @@ class Master():
     def terminate(self):
         self.end = True
         self.sendTerminate()
-        # time.sleep(3)
         processing.combine(f'tests/{self.testCase}/home/reducers', f'tests/{self.testCase}/combinedOutput.txt')
-        # time.sleep(2)
         if self.clear == "TRUE":
             processing.cleanUp(self.testCase)
         print('Terminating the Master')
@@ -200,18 +192,17 @@ class Master():
         while True:
             if self.end:
                 break
-            print(list(self.mapper_pulse_times.keys()))
             for mapper_id, last_pulse_time in self.mapper_pulse_times.items():
                 current_time = datetime.now().timestamp()
+                print(self.mapper_pulse_times,current_time)
                 if abs(current_time - last_pulse_time) > self.TIMEOUT:
                     self.track_mappers[mapper_id] = False
                     self.mappersDone = False
                     print(f"Mapper with id {mapper_id} is dead")
-                    print("current", current_time, last_pulse_time, current_time - last_pulse_time)
                     self.killMapper(mapper_id)  
                 else:
-                    print('Mapper is still alive ', mapper_id)
-            time.sleep(self.TIMEOUT)
+                    print(f'Pulse from {mapper_id}')
+            time.sleep(1)
             
             
     def checkPulseReducers(self):
@@ -225,7 +216,7 @@ class Master():
                     print(f"Terminating Reducer with id {reducer_id}")
                     self.killReducer()  
                 else:
-                    print('Reducer is still alive')
+                    print(f'Pulse from {reducer_id}')
             time.sleep(1)
             
             
@@ -258,10 +249,7 @@ class Master():
         pass
     
     def run(self):
-        print('Running ',self.testCase)
-        # processing.createFiles(self.testCase, self.num_mappers,self.num_reducers)
-        for mapper in self.mappers:
-            self.track_mappers[mapper["id"]] = False
+        print('Running',self.testCase)
             
         self.start_mappers()
         time.sleep(2)

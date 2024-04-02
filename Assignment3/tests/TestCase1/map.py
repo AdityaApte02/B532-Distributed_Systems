@@ -5,7 +5,7 @@ def map_task(text, id):
     cleaned_text = re.sub(r'[^\w\s]', '', text)
     lines = cleaned_text.split(" ")
     for word in lines:
-        time.sleep(0.1)
+        time.sleep(0.05)
         print(word,"\t1")
 
 if __name__ == '__main__':

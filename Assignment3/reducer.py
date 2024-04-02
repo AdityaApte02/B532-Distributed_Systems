@@ -18,12 +18,14 @@ class Reducer():
         self.host = host
         self.port = port
         self.reduce_func = reduce_func
-        self.PULSE_INTERVAL = 0.5
+        self.PULSE_INTERVAL = 1
         self.num_mappers = num_mappers
         self.input_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"input.txt")
         self.output_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"output.txt")
         self.reduce_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.reduce_func)
         self.mapper_dict = {}
+        for i in range(num_mappers):
+            self.mapper_dict["mapper"+str(i+1)] = False
         self.end = False
         self.run()
         
@@ -71,7 +73,10 @@ class Reducer():
                     print('> Terminate count:',t_count)
                 else:
                     key = msg_list[2]
-                    value = msg_list[3]
+                    start_index = msgdata.find('[')
+                    end_index = msgdata.rfind(']')
+                    sublist_string = msgdata[start_index:end_index + 1]
+                    value = str(sublist_string.strip('[]').split(', '))
                     with open(self.input_path , 'a') as file:
                         file.write(key+'\t'+value+'\n')
         except Exception as e:
@@ -106,12 +111,15 @@ class Reducer():
                 
     
     def checkMappers(self):
-        if self.end:
-            return
-        flag = True
-        for mapper in self.mapper_dict.keys():
-            if self.mapper_dict[mapper] == False:
-                flag = False
+        while True:
+            if self.end:
+                return
+            flag = True
+            for mapper in self.mapper_dict.keys():
+                if self.mapper_dict[mapper] == False:
+                    flag = False
+                    break
+            if flag:
                 break
         if flag:
             print('Start Reducing')
@@ -123,12 +131,12 @@ class Reducer():
             
     def createOutputBuffer(self):
         if os.path.exists(self.output_path):
+             self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"output1.txt")
+        if os.path.exists(self.input_path):
             self.input_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"input1.txt")
-            self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","reducers",str(self.id),"output1.txt")
-            
+           
         with open(self.input_path,"w") as file:
             pass 
-            
         with open(self.output_path,"w") as file:
             pass 
                 

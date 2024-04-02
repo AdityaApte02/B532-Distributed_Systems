@@ -1,301 +1,301 @@
-Am	D1
-And	D1
-Giantkiller	D1
-Jack	D1
-July	D1
-Place	D1
-S	D1
-Yes	D1
-be	D1
-became	D1
-because	D1
-become	D1
-been	D1
-below	D1
-brains	D1
-bridge	D1
-but	D1
-by	D1
-each	D1
-early	D1
-evening	D1
-every	D1
-exceptionally	D1
-excuses	D1
-had	D1
-hands	D1
-he	D1
-her	D1
-hesitation	D1
-high	D1
-him	D1
-himself	D1
-his	D1
-hopelessly	D1
-hot	D1
-house	D1
-however	D1
-hypochondria	D1
-kitchen	D1
-know	D1
-new	D1
-not	D1
-nothing	D1
-now	D1
-quite	D1
-talking	D1
-terror	D1
-than	D1
-that	D1
-thatâs	D1
-the	D1
-there	D1
-these	D1
-they	D1
-thing	D1
-thinking	D1
-this	D1
-though	D1
-thought	D1
-threats	D1
-time	D1
-to	D1
-together	D1
-too	D1
-towards	D1
-triflesâ	D1
-trivial	D1
-walked	D1
-want	D1
-was	D1
-weigh	D1
-went	D1
-what	D1
-which	D1
-who	D1
-with	D1
-word	D1
-would	D1
-An	D2
-And	D2
-At	D2
-German	D2
-Market	D2
-Petersburg	D2
-Soon	D2
-Yes	D2
-bad	D2
-badly	D2
-bawling	D2
-be	D2
-beautiful	D2
-become	D2
-been	D2
-being	D2
-bent	D2
-bespattered	D2
-bitterness	D2
-blankness	D2
-bricks	D2
-brimless	D2
-brown	D2
-business	D2
-bustle	D2
-but	D2
-by	D2
-establishments	D2
-even	D2
-everythingâ	D2
-exceptionally	D2
-expression	D2
-eyes	D2
-habit	D2
-had	D2
-hair	D2
-handsome	D2
-hat	D2
-hatterâ	D2
-have	D2
-he	D2
-heart	D2
-heat	D2
-heavy	D2
-height	D2
-him	D2
-himself	D2
-himâthe	D2
-his	D2
-horse	D2
-however	D2
-huge	D2
-knew	D2
-nerves	D2
-no	D2
-not	D2
-noticeable	D2
-noticed	D2
-number	D2
-numerous	D2
-quarter	D2
-queer	D2
-quite	D2
-taken	D2
-talking	D2
-tall	D2
-tangle	D2
-tasted	D2
-terrible	D2
-terror	D2
-that	D2
-the	D2
-them	D2
-there	D2
-these	D2
-thing	D2
-this	D2
-thought	D2
-time	D2
-to	D2
-too	D2
-top	D2
-torn	D2
-town	D2
-trading	D2
-tremulously	D2
-trifles	D2
-trivial	D2
-two	D2
-types	D2
-waggon	D2
-walked	D2
-was	D2
-way	D2
-weak	D2
-wear	D2
-wears	D2
-wellbuilt	D2
-were	D2
-what	D2
-when	D2
-which	D2
-who	D2
-whole	D2
-whom	D2
-with	D2
-worked	D2
-working	D2
-worn	D2
-worst	D2
-would	D2
-At	D3
-German	D3
-Germans	D3
-She	D3
-back	D3
-barred	D3
-be	D3
-been	D3
-before	D3
-begun	D3
-bell	D3
-bells	D3
-best	D3
-bolder	D3
-bring	D3
-building	D3
-but	D3
-by	D3
-employed	D3
-engaged	D3
-entry	D3
-etc	D3
-even	D3
-every	D3
-evident	D3
-exactly	D3
-except	D3
-excitement	D3
-exploit	D3
-expression	D3
-eyed	D3
-eyes	D3
-had	D3
-hair	D3
-have	D3
-he	D3
-heart	D3
-heat	D3
-help	D3
-henâs	D3
-her	D3
-hideous	D3
-him	D3
-himself	D3
-his	D3
-house	D3
-houses	D3
-how	D3
-huge	D3
-hundred	D3
-hung	D3
-kerchief	D3
-kindsâtailors	D3
-kitchen	D3
-knew	D3
-knotted	D3
-narrow	D3
-neck	D3
-nerves	D3
-nervous	D3
-no	D3
-none	D3
-nose	D3
-not	D3
-note	D3
-nothing	D3
-now	D3
-number	D3
-tantalising	D3
-tenements	D3
-terribly	D3
-that	D3
-the	D3
-their	D3
-them	D3
-then	D3
-there	D3
-these	D3
-they	D3
-thickly	D3
-thin	D3
-thing	D3
-thirty	D3
-this	D3
-those	D3
-though	D3
-thought	D3
-through	D3
-time	D3
-tin	D3
-tinkle	D3
-tiny	D3
-to	D3
-tremor	D3
-two	D3
-was	D3
-way	D3
-went	D3
-were	D3
-what	D3
-when	D3
-which	D3
-while	D3
-who	D3
-wide	D3
-with	D3
-withered	D3
-woman	D3
-womanâs	D3
-wore	D3
-working	D3
-would	D3
+Am	["'D1'"]
+And	["'D1'"]
+Giantkiller	["'D1'"]
+Jack	["'D1'"]
+July	["'D1'"]
+Place	["'D1'"]
+S	["'D1'"]
+Yes	["'D1'"]
+An	["'D2'"]
+And	["'D2'"]
+At	["'D2'"]
+German	["'D2'"]
+Market	["'D2'"]
+Petersburg	["'D2'", "'D2'"]
+Soon	["'D2'"]
+Yes	["'D2'"]
+At	["'D3'"]
+German	["'D3'", "'D3'"]
+Germans	["'D3'"]
+She	["'D3'"]
+be	["'D1'", "'D1'", "'D1'"]
+became	["'D1'"]
+because	["'D1'", "'D1'", "'D1'"]
+become	["'D1'"]
+been	["'D1'"]
+below	["'D1'"]
+brains	["'D1'"]
+bridge	["'D1'"]
+but	["'D1'", "'D1'", "'D1'"]
+by	["'D1'", "'D1'"]
+back	["'D3'"]
+barred	["'D3'"]
+be	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+been	["'D3'", "'D3'"]
+before	["'D3'"]
+begun	["'D3'"]
+bell	["'D3'", "'D3'", "'D3'"]
+bells	["'D3'"]
+best	["'D3'"]
+bolder	["'D3'"]
+bring	["'D3'"]
+building	["'D3'"]
+but	["'D3'", "'D3'", "'D3'"]
+by	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+each	["'D1'"]
+early	["'D1'"]
+evening	["'D1'", "'D1'"]
+every	["'D1'"]
+exceptionally	["'D1'"]
+excuses	["'D1'"]
+had	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+hands	["'D1'"]
+he	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+her	["'D1'", "'D1'", "'D1'"]
+hesitation	["'D1'"]
+high	["'D1'"]
+him	["'D1'", "'D1'", "'D1'", "'D1'"]
+himself	["'D1'"]
+his	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+hopelessly	["'D1'"]
+hot	["'D1'"]
+house	["'D1'"]
+however	["'D1'"]
+hypochondria	["'D1'"]
+kitchen	["'D1'"]
+know	["'D1'"]
+bad	["'D2'"]
+badly	["'D2'"]
+bawling	["'D2'"]
+be	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+beautiful	["'D2'"]
+become	["'D2'"]
+been	["'D2'"]
+being	["'D2'"]
+bent	["'D2'"]
+bespattered	["'D2'"]
+bitterness	["'D2'"]
+blankness	["'D2'"]
+bricks	["'D2'"]
+brimless	["'D2'"]
+brown	["'D2'"]
+business	["'D2'"]
+employed	["'D3'"]
+engaged	["'D3'"]
+entry	["'D3'"]
+etc	["'D3'"]
+even	["'D3'"]
+every	["'D3'", "'D3'"]
+evident	["'D3'"]
+exactly	["'D3'"]
+except	["'D3'"]
+excitement	["'D3'"]
+exploit	["'D3'"]
+expression	["'D3'"]
+eyed	["'D3'"]
+eyes	["'D3'", "'D3'", "'D3'", "'D3'"]
+new	["'D1'", "'D1'"]
+not	["'D1'", "'D1'", "'D1'"]
+nothing	["'D1'", "'D1'"]
+now	["'D1'"]
+bustle	["'D2'"]
+but	["'D2'", "'D2'", "'D2'"]
+by	["'D2'", "'D2'"]
+had	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+hair	["'D3'"]
+have	["'D3'", "'D3'"]
+he	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+heart	["'D3'"]
+heat	["'D3'"]
+help	["'D3'"]
+henâs	["'D3'"]
+her	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+hideous	["'D3'"]
+him	["'D3'", "'D3'", "'D3'", "'D3'"]
+himself	["'D3'", "'D3'", "'D3'", "'D3'"]
+his	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+house	["'D3'", "'D3'", "'D3'", "'D3'"]
+quite	["'D1'"]
+talking	["'D1'"]
+terror	["'D1'"]
+than	["'D1'", "'D1'"]
+that	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+thatâs	["'D1'"]
+the	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+there	["'D1'"]
+these	["'D1'"]
+they	["'D1'"]
+thing	["'D1'"]
+thinking	["'D1'"]
+this	["'D1'"]
+though	["'D1'"]
+thought	["'D1'"]
+threats	["'D1'"]
+establishments	["'D2'"]
+even	["'D2'"]
+everythingâ	["'D2'"]
+exceptionally	["'D2'"]
+expression	["'D2'"]
+eyes	["'D2'"]
+habit	["'D2'"]
+had	["'D2'", "'D2'", "'D2'"]
+hair	["'D2'"]
+handsome	["'D2'"]
+hat	["'D2'", "'D2'", "'D2'", "'D2'"]
+hatterâ	["'D2'"]
+have	["'D2'", "'D2'", "'D2'"]
+he	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+heart	["'D2'", "'D2'"]
+heat	["'D2'"]
+heavy	["'D2'"]
+height	["'D2'"]
+houses	["'D3'"]
+how	["'D3'"]
+huge	["'D3'"]
+hundred	["'D3'"]
+hung	["'D3'"]
+kerchief	["'D3'"]
+kindsâtailors	["'D3'"]
+kitchen	["'D3'"]
+knew	["'D3'", "'D3'", "'D3'"]
+knotted	["'D3'"]
+time	["'D1'", "'D1'", "'D1'"]
+to	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+together	["'D1'"]
+too	["'D1'"]
+towards	["'D1'"]
+triflesâ	["'D1'"]
+trivial	["'D1'"]
+walked	["'D1'"]
+want	["'D1'"]
+was	["'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'", "'D1'"]
+weigh	["'D1'"]
+him	["'D2'", "'D2'", "'D2'", "'D2'"]
+himself	["'D2'"]
+himâthe	["'D2'"]
+his	["'D2'", "'D2'", "'D2'", "'D2'"]
+horse	["'D2'"]
+however	["'D2'", "'D2'", "'D2'"]
+huge	["'D2'"]
+knew	["'D2'"]
+narrow	["'D3'"]
+neck	["'D3'"]
+nerves	["'D3'"]
+nervous	["'D3'"]
+no	["'D3'", "'D3'"]
+none	["'D3'"]
+nose	["'D3'"]
+not	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+note	["'D3'"]
+nothing	["'D3'"]
+now	["'D3'", "'D3'", "'D3'", "'D3'"]
+number	["'D3'"]
+went	["'D1'"]
+what	["'D1'", "'D1'"]
+which	["'D1'", "'D1'", "'D1'"]
+who	["'D1'"]
+with	["'D1'", "'D1'"]
+word	["'D1'"]
+would	["'D1'", "'D1'"]
+nerves	["'D2'"]
+no	["'D2'"]
+not	["'D2'", "'D2'", "'D2'"]
+noticeable	["'D2'", "'D2'"]
+noticed	["'D2'"]
+number	["'D2'"]
+numerous	["'D2'"]
+quarter	["'D2'"]
+queer	["'D2'"]
+quite	["'D2'"]
+tantalising	["'D3'"]
+tenements	["'D3'"]
+terribly	["'D3'"]
+that	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+the	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+their	["'D3'"]
+them	["'D3'", "'D3'", "'D3'"]
+then	["'D3'"]
+there	["'D3'"]
+these	["'D3'"]
+they	["'D3'"]
+thickly	["'D3'"]
+thin	["'D3'"]
+thing	["'D3'"]
+taken	["'D2'"]
+talking	["'D2'"]
+tall	["'D2'"]
+tangle	["'D2'"]
+tasted	["'D2'"]
+terrible	["'D2'"]
+terror	["'D2'"]
+that	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+the	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+them	["'D2'"]
+there	["'D2'", "'D2'"]
+these	["'D2'", "'D2'"]
+thing	["'D2'", "'D2'"]
+this	["'D2'", "'D2'", "'D2'"]
+thought	["'D2'", "'D2'"]
+thirty	["'D3'"]
+this	["'D3'", "'D3'", "'D3'"]
+those	["'D3'"]
+though	["'D3'"]
+thought	["'D3'"]
+through	["'D3'", "'D3'", "'D3'"]
+time	["'D3'"]
+tin	["'D3'"]
+tinkle	["'D3'", "'D3'"]
+tiny	["'D3'", "'D3'", "'D3'"]
+to	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+tremor	["'D3'"]
+two	["'D3'", "'D3'"]
+was	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+way	["'D3'"]
+went	["'D3'"]
+were	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+what	["'D3'"]
+when	["'D3'"]
+time	["'D2'", "'D2'", "'D2'"]
+to	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+too	["'D2'"]
+top	["'D2'"]
+torn	["'D2'"]
+town	["'D2'", "'D2'", "'D2'"]
+trading	["'D2'"]
+tremulously	["'D2'"]
+trifles	["'D2'", "'D2'"]
+trivial	["'D2'"]
+two	["'D2'"]
+types	["'D2'"]
+waggon	["'D2'"]
+walked	["'D2'"]
+was	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]
+way	["'D2'"]
+weak	["'D2'"]
+wear	["'D2'"]
+which	["'D3'", "'D3'", "'D3'", "'D3'"]
+while	["'D3'"]
+who	["'D3'"]
+wide	["'D3'"]
+with	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+withered	["'D3'"]
+woman	["'D3'", "'D3'", "'D3'", "'D3'", "'D3'"]
+womanâs	["'D3'"]
+wore	["'D3'"]
+working	["'D3'"]
+would	["'D3'", "'D3'"]
+wears	["'D2'"]
+wellbuilt	["'D2'"]
+were	["'D2'", "'D2'"]
+what	["'D2'", "'D2'"]
+when	["'D2'", "'D2'"]
+which	["'D2'", "'D2'"]
+who	["'D2'", "'D2'"]
+whole	["'D2'"]
+whom	["'D2'", "'D2'"]
+with	["'D2'", "'D2'", "'D2'", "'D2'"]
+worked	["'D2'"]
+working	["'D2'", "'D2'"]
+worn	["'D2'"]
+worst	["'D2'"]
+would	["'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'", "'D2'"]

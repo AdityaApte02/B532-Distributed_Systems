@@ -22,12 +22,11 @@ class Mapper():
         self.host = host
         self.port = port
         self.map_func = map_func
-        self.PULSE_INTERVAL = 0.5
+        self.PULSE_INTERVAL = 1
         self.kill = False
         self.map_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.map_func)
         self.input_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"input.txt")
         self.output_path = os.path.join(os.getcwd(),"tests",self.testCase,"home","mappers",str(self.id),"output.txt")
-        
         self.reducers = []
         self.send = False
         self.num_reducers = num_reducers
@@ -126,8 +125,6 @@ class Mapper():
         Run the map function
         '''
         command = ["python", self.map_path, "<", self.input_path, ">", self.output_path, self.id]
-
-        # Start the subprocess
         process = subprocess.Popen(command, shell=True)
         return_code = process.wait()
       
@@ -140,13 +137,7 @@ class Mapper():
       
     def computeHash(self,str1):
         return ord(str1[0])
-    
-    
-    def convert_to_int_or_str(self, s):
-        try:
-            return int(s)
-        except ValueError:
-            return s
+
       
     def sendData(self):
         shuffled_data = defaultdict(list)
@@ -154,7 +145,7 @@ class Mapper():
             for line in file:
                 if len(line.strip().split('\t')) == 2:
                     word, count = line.strip().split('\t')
-                    shuffled_data[word].append(self.convert_to_int_or_str(count))
+                    shuffled_data[word].append(count)
                     
         sorted_keys = sorted(shuffled_data.keys())
         for key in sorted_keys:
