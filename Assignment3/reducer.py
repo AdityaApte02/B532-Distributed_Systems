@@ -24,6 +24,7 @@ class Reducer():
         self.output_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"output.txt")
         self.reduce_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.reduce_func)
         self.mapper_dict = {}
+        self.mappersDone = False
         for i in range(num_mappers):
             self.mapper_dict["mapper"+str(i+1)] = False
         self.end = False
@@ -85,10 +86,16 @@ class Reducer():
             mapper_socket.close()
             
     def execute(self):
-        command = ["python", self.reduce_path, "<", self.input_path, ">", self.output_path]
+        try:
+            command = ["python", self.reduce_path, "<", self.input_path, ">", self.output_path]
 
-        process = subprocess.Popen(command, shell=True)
-        return_code = process.wait()
+            process = subprocess.Popen(command, shell=True)
+            return_code = process.wait()
+            
+            return return_code
+        
+        except Exception as e:
+            print(e)
             
     
     def terminate(self):
@@ -97,7 +104,6 @@ class Reducer():
         os.kill(os.getpid(), signal.SIGINT)
     
     def sendDoneToMaster(self):
-        time.sleep(1)
         master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         master_socket.connect((self.masterHost, self.masterPort))
         try:
@@ -111,23 +117,22 @@ class Reducer():
                 
     
     def checkMappers(self):
-        while True:
+        while not self.mappersDone:
             if self.end:
-                return
-            flag = True
-            for mapper in self.mapper_dict.keys():
-                if self.mapper_dict[mapper] == False:
-                    flag = False
-                    break
-            if flag:
                 break
-        if flag:
-            print('Start Reducing')
-            time.sleep(3)
-            self.execute()
-            time.sleep(1)
-            self.sendDoneToMaster()
-            
+            self.mappersDone = all(self.mapper_dict[mapper] for mapper in self.mapper_dict)
+            print(list(self.mapper_dict.items()))
+            print("Mappers Done Check", self.mappersDone)
+            if self.mappersDone:
+                print('Start Reducing')
+                time.sleep(1)
+                code = self.execute()
+                print("code", code)
+                print('Done Executing')
+                if code == 0:
+                    time.sleep(1)
+                    self.sendDoneToMaster()
+                
             
     def createOutputBuffer(self):
         if os.path.exists(self.output_path):
@@ -142,6 +147,7 @@ class Reducer():
                 
         
     def run(self):
+        print(f'spawned reducer with id {self.id}')
         self.createOutputBuffer()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         thread.start()

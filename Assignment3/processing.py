@@ -20,7 +20,12 @@ def cleanUp(testCase):
                 if "mapper" in directory_name :
                     output_file_path = os.path.join(directory_path, "output.txt")
                     if os.path.exists(output_file_path): 
-                        os.remove(output_file_path)  
+                        os.remove(output_file_path) 
+                        
+                    output1_file_path = os.path.join(directory_path, "output1.txt")
+                    if os.path.exists(output1_file_path): 
+                        os.remove(output1_file_path) 
+                         
                 elif "reducer" in directory_name:
                     input_file_path = os.path.join(directory_path, "input.txt")
                     if os.path.exists(input_file_path):  

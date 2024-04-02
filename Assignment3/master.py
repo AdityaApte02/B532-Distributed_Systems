@@ -45,7 +45,7 @@ class Master():
         
     def handle_mappers(self, mapper_obj):
         mapper = Mapper(self.host, self.port, mapper_obj["id"], mapper_obj["host"], mapper_obj["port"], self.map_function, self.num_reducers, self.testCase)
-        print(f'spawned mapper with id {mapper_obj["id"]}')
+        
         
     def start_mappers(self):
         mapper_processes = []
@@ -57,7 +57,6 @@ class Master():
             
     def handle_reducers(self, reducer_obj):
         reducer = Reducer(self.host, self.port, reducer_obj["id"], reducer_obj["host"], reducer_obj["port"], self.reduce_function, self.num_mappers, self.testCase)
-        print(f'spawned reducer with id {reducer_obj["id"]}')
             
     def start_reducers(self):
         for i in range(len(self.reducers)):
@@ -105,7 +104,8 @@ class Master():
                 if self.track_mappers[mapper] == True:
                     self.mappersDone = True    
                 else:
-                    self.mappersDone = False  
+                    self.mappersDone = False
+                    break  
             if self.mappersDone:
                     print("All mappers are done mapping")
                     self.start_reducers()
@@ -138,11 +138,13 @@ class Master():
                 
     def checkReducers(self):
         while not self.reducersDone:
+            # print(list(self.track_reducers.items()))
             for reducer in self.track_reducers.keys():
                 if self.track_reducers[reducer] == True:
                     self.reducersDone = True    
                 else:
-                    self.reducersDone = False  
+                    self.reducersDone = False
+                    break  
             if self.reducersDone:
                 print("All reducers are done reducing")
                 print('Terminating MapReduce')
@@ -250,7 +252,6 @@ class Master():
     
     def run(self):
         print('Running',self.testCase)
-            
         self.start_mappers()
         time.sleep(2)
         

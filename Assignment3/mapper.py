@@ -211,6 +211,7 @@ class Mapper():
             pass 
             
     def run(self):
+        print(f'spawned mapper with id {self.id}')
         self.createOutputBuffer()
         self.readConfig()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
