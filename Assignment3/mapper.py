@@ -11,6 +11,7 @@ from message import SendDoneToReducer
 from collections import defaultdict
 import json
 import subprocess
+import logging
 import signal
 
 class Mapper():
@@ -30,7 +31,7 @@ class Mapper():
         self.reducers = []
         self.send = False
         self.num_reducers = num_reducers
-        self.end = False
+        self.end = False 
         self.run()
         
         

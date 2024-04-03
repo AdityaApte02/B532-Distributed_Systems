@@ -8,6 +8,7 @@ from message import PulseMessageReducer
 from message import DoneMessageReducer
 import subprocess
 import signal
+import logging
 
 class Reducer():
     def __init__(self, masterHost, masterPort, id, host, port, reduce_func, num_mappers, test):
@@ -24,7 +25,7 @@ class Reducer():
         self.output_path = os.path.join(os.getcwd(), f"tests/{self.testCase}/home","reducers",str(self.id),"output.txt")
         self.reduce_path = os.path.join(os.getcwd(), f"tests/{self.testCase}", self.reduce_func)
         self.mapper_dict = {}
-        self.mappersDone = False
+        self.mappersDone = False 
         for i in range(num_mappers):
             self.mapper_dict["mapper"+str(i+1)] = False
         self.end = False

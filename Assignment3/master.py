@@ -12,6 +12,7 @@ from message import Terminate
 from message import ClearMessage
 import processing
 from datetime import datetime
+import logging
 
 class Master():
     def __init__(self, host, port, mappers, reducers, map_function, reduce_function, test, clear):
