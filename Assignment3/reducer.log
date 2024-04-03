@@ -1,0 +1,94 @@
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mspawned reducer with id reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mspawned reducer with id reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mspawned reducer with id reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper1 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper1 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper1 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper2 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper2 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper2 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper3 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper3 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper3 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mTerminating Reducer reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mTerminating Reducer reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mTerminating Reducer reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mspawned reducer with id reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mspawned reducer with id reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mspawned reducer with id reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper1 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper1 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper1 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper2 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper2 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper2 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper3 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper3 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper3 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mTerminating Reducer reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mTerminating Reducer reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mTerminating Reducer reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mspawned reducer with id reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mspawned reducer with id reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mspawned reducer with id reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper1 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper1 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper1 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper3 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper3 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper3 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper2 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper2 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper2 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mTerminating Reducer reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mTerminating Reducer reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mTerminating Reducer reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mspawned reducer with id reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mspawned reducer with id reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mspawned reducer with id reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 started sending pulse[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper1 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper1 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper1 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper2 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper2 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper2 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mmapper3 is Done sending the Data to reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mmapper3 is Done sending the Data to reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mmapper3 is Done sending the Data to reducer3[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Started Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mreducer2 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mreducer3 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mreducer1 Done Reducing[0m
+DEBUG:root:[35m[1m> Reducer-{reducer1}.....[0m[92mTerminating Reducer reducer1[0m
+DEBUG:root:[35m[1m> Reducer-{reducer2}.....[0m[92mTerminating Reducer reducer2[0m
+DEBUG:root:[35m[1m> Reducer-{reducer3}.....[0m[92mTerminating Reducer reducer3[0m

@@ -8,6 +8,7 @@ from message import PulseMessageReducer
 from message import DoneMessageReducer
 import subprocess
 import signal
+from colorama import Fore, Style
 import logging
 
 class Reducer():
@@ -31,11 +32,36 @@ class Reducer():
         self.end = False
         self.run()
         
+        
+    def display(self,msg):
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(filename='reducer.log', level=logging.DEBUG)
+        logging.debug(Fore.MAGENTA
+            + Style.BRIGHT
+            + "> Reducer-{"
+            + self.id
+            + "}....."
+            + Style.RESET_ALL
+            + Fore.LIGHTGREEN_EX
+            + msg
+            + Style.RESET_ALL)
+        print(
+            Fore.MAGENTA
+            + Style.BRIGHT
+            + "> Reducer-{"
+            + self.id
+            + "}....."
+            + Style.RESET_ALL
+            + Fore.LIGHTGREEN_EX
+            + msg
+            + Style.RESET_ALL
+        )
+        
     def sendPulseToMaster(self):
         '''
         Send the pulse signal to the Master
         '''
-        print(f'{self.id} started sending pulse')
+        self.display(f'{self.id} started sending pulse')
         while True:
             if self.end:
                 break
@@ -47,7 +73,7 @@ class Reducer():
                 msg = pulseMessageObj.serialize()
                 pulse_socket.send(msg.encode("utf-8")) 
             except Exception as e:
-                print(e)
+                self.display(e)
             finally:
                 pulse_socket.close()
                 
@@ -68,7 +94,7 @@ class Reducer():
                 mapper_id = msg_list[1]
                 msg = msg_list[0]
                 if msg == "DONE_MAPPER_REDUCER":
-                    print(f'{mapper_id} is Done sending the Data to {self.id}')
+                    self.display(f'{mapper_id} is Done sending the Data to {self.id}')
                     self.mapper_dict[mapper_id] = True  
                 elif msg == "TERMINATE":
                     self.terminate()   
@@ -81,7 +107,7 @@ class Reducer():
                     with open(self.input_path , 'a') as file:
                         file.write(key+'\t'+value+'\n')
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
             mapper_socket.close()
             
@@ -93,11 +119,11 @@ class Reducer():
             return return_code
         
         except Exception as e:
-            print(e)
+            self.display(e)
             
     
     def terminate(self):
-        print(f'Terminating Reducer {self.id}')
+        self.display(f'Terminating Reducer {self.id}')
         self.end = True
         os.kill(os.getpid(), signal.SIGINT)
     
@@ -109,7 +135,7 @@ class Reducer():
             msg = send_master_obj.serialize()
             master_socket.send(msg.encode("utf-8")) 
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
             master_socket.close()
                 
@@ -120,10 +146,10 @@ class Reducer():
                 break
             self.mappersDone = all(self.mapper_dict[mapper] for mapper in self.mapper_dict)
             if self.mappersDone:
-                print(f'{self.id} Started Reducing')
+                self.display(f'{self.id} Started Reducing')
                 time.sleep(1)
                 code = self.execute()
-                print(f'{self.id} Done Reducing')
+                self.display(f'{self.id} Done Reducing')
                 if code == 0:
                     time.sleep(1)
                     self.sendDoneToMaster()
@@ -137,7 +163,7 @@ class Reducer():
             pass
         
     def run(self):
-        print(f'spawned reducer with id {self.id}')
+        self.display(f'spawned reducer with id {self.id}')
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
         thread.start()
         

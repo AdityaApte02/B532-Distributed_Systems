@@ -1,0 +1,24 @@
+DEBUG:root:[32m[1m> Master...........[0m[91mRunning TestCase1[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll mappers are done mapping[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mSending Request to Send to mappers[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll reducers are done reducing[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating MapReduce[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating the Master[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mRunning TestCase2[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll mappers are done mapping[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mSending Request to Send to mappers[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll reducers are done reducing[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating MapReduce[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating the Master[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mRunning TestCase1[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll mappers are done mapping[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mSending Request to Send to mappers[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll reducers are done reducing[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating MapReduce[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating the Master[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mRunning TestCase2[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll mappers are done mapping[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mSending Request to Send to mappers[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mAll reducers are done reducing[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating MapReduce[0m
+DEBUG:root:[32m[1m> Master...........[0m[91mTerminating the Master[0m

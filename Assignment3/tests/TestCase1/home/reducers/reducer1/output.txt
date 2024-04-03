@@ -134,9 +134,6 @@ revolting 	 1
 round 	 1
 ruin 	 1
 rusty 	 1
-unable 	 1
-unknown 	 1
-unseemly 	 1
 Her 	 1
 Now 	 1
 There 	 2
@@ -210,3 +207,6 @@ right 	 1
 ring 	 1
 unnoticed 	 1
 untenanted 	 1
+unable 	 1
+unknown 	 1
+unseemly 	 1

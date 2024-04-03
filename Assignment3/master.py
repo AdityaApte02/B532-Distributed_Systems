@@ -13,6 +13,7 @@ from message import ClearMessage
 import processing
 from datetime import datetime
 import logging
+from colorama import Fore, Style
 
 class Master():
     def __init__(self, host, port, mappers, reducers, map_function, reduce_function, test, clear):
@@ -54,6 +55,28 @@ class Master():
             process.start()
             
             
+    def display(self,msg):
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(filename='master.log', level=logging.DEBUG)
+        logging.debug(Fore.GREEN
+            + Style.BRIGHT
+            + "> Master"
+            + "..........."
+            + Style.RESET_ALL
+            + Fore.LIGHTRED_EX
+            + msg
+            + Style.RESET_ALL)
+        print(
+            Fore.GREEN
+            + Style.BRIGHT
+            + "> Master"
+            + "..........."
+            + Style.RESET_ALL
+            + Fore.LIGHTRED_EX
+            + msg
+            + Style.RESET_ALL
+        )
+            
     def handle_reducers(self, reducer_obj):
         reducer = Reducer(self.host, self.port, reducer_obj["id"], reducer_obj["host"], reducer_obj["port"], self.reduce_function, self.num_mappers, self.testCase)
             
@@ -92,7 +115,7 @@ class Master():
                     reducer_id = msg_str_list[1]
                     self.track_reducers[reducer_id] = True
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
             mapper_pulse_socket.close()
                 
@@ -106,7 +129,7 @@ class Master():
                     self.mappersDone = False
                     break  
             if self.mappersDone:
-                    print("All mappers are done mapping")
+                    self.display("All mappers are done mapping")
                     self.start_reducers()
                     time.sleep(1)
                     check_pulse_reducers = threading.Thread(target=self.checkPulseReducers, args=())
@@ -119,7 +142,7 @@ class Master():
         '''
         Send a message to mappers to send data to the Reducers
         '''
-        print('Sending Request to Send to mappers')
+        self.display('Sending Request to Send to mappers')
         if self.mappersDone:
             for i in range(len(self.mappers)):
                 for j in range(len(self.reducers)):
@@ -131,7 +154,7 @@ class Master():
                         msg = sendtomappermsg.serialize()
                         send_mapper.send(msg.encode("utf-8"))
                     except Exception as e:
-                        print(e)
+                        self.display(e)
                     finally:
                         send_mapper.close()
                 
@@ -144,8 +167,8 @@ class Master():
                     self.reducersDone = False
                     break  
             if self.reducersDone:
-                print("All reducers are done reducing")
-                print('Terminating MapReduce')
+                self.display("All reducers are done reducing")
+                self.display('Terminating MapReduce')
                 self.terminate()
             
     def sendTerminate(self):
@@ -157,7 +180,7 @@ class Master():
                 msg = terminate.serialize()
                 send_terminate_mapper.send(msg.encode("utf-8"))
             except Exception as e:
-                print(e)
+                self.display(e)
             finally:
                 send_terminate_mapper.close()          
                 
@@ -171,7 +194,7 @@ class Master():
                 msg = terminate.serialize()
                 send_terminate_reducer.send(msg.encode("utf-8"))
             except Exception as e:
-                print(e)
+                self.display(e)
             finally:
                 send_terminate_reducer.close()
                 
@@ -182,7 +205,7 @@ class Master():
         processing.combine(f'tests/{self.testCase}/home/reducers', f'tests/{self.testCase}/combinedOutput.txt')
         if self.clear == "TRUE":
             processing.cleanUp(self.testCase)
-        print('Terminating the Master')
+        self.display('Terminating the Master')
         time.sleep(4)
         os.kill(os.getpid(), signal.SIGINT)
     
@@ -197,7 +220,7 @@ class Master():
                 if abs(current_time - last_pulse_time) > self.TIMEOUT:
                     self.track_mappers[mapper_id] = False
                     self.mappersDone = False
-                    print(f"Mapper with id {mapper_id} is dead")
+                    self.display(f"Mapper with id {mapper_id} is dead")
                     self.killMapper(mapper_id)  
             time.sleep(1)
             
@@ -210,7 +233,7 @@ class Master():
             for reducer_id, last_pulse_time in self.reducer_pulse_times.items():
                 current_time =  datetime.now().timestamp()
                 if abs(current_time - last_pulse_time) > self.TIMEOUT:
-                    print(f"Mapper with id {reducer_id} is dead")
+                    self.display(f"Mapper with id {reducer_id} is dead")
                     self.killReducer()  
             time.sleep(1)
             
@@ -243,7 +266,7 @@ class Master():
         pass
     
     def run(self):
-        print('Running',self.testCase)
+        self.display(f"Running {self.testCase}")
         self.start_mappers()
         time.sleep(2)
         

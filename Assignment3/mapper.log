@@ -1,0 +1,48 @@
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mspawned mapper with id mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mmapper1 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mspawned mapper with id mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mmapper2 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mspawned mapper with id mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mmapper3 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mMapping Done by mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mMapping Done by mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mMapping Done by mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mTerminating Mapper mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mTerminating Mapper mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mTerminating Mapper mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mspawned mapper with id mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mmapper1 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mspawned mapper with id mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mmapper2 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mspawned mapper with id mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mmapper3 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mMapping Done by mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mMapping Done by mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mMapping Done by mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mTerminating Mapper mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mTerminating Mapper mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mTerminating Mapper mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mspawned mapper with id mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mmapper1 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mspawned mapper with id mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mmapper2 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mspawned mapper with id mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mmapper3 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mMapping Done by mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mMapping Done by mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mMapping Done by mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mTerminating Mapper mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mTerminating Mapper mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mTerminating Mapper mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mspawned mapper with id mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mmapper1 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mspawned mapper with id mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mmapper2 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mspawned mapper with id mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mmapper3 started sending pulse[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mMapping Done by mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mMapping Done by mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mMapping Done by mapper3[0m
+DEBUG:root:[36m[1m> Mapper-{mapper1}......[0m[33mTerminating Mapper mapper1[0m
+DEBUG:root:[36m[1m> Mapper-{mapper2}......[0m[33mTerminating Mapper mapper2[0m
+DEBUG:root:[36m[1m> Mapper-{mapper3}......[0m[33mTerminating Mapper mapper3[0m

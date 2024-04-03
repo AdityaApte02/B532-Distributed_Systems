@@ -11,6 +11,7 @@ from message import SendDoneToReducer
 from collections import defaultdict
 import json
 import subprocess
+from colorama import Fore, Style
 import logging
 import signal
 
@@ -39,7 +40,7 @@ class Mapper():
         '''
         Send the pulse signal to the Master
         '''
-        print(f'{self.id} started sending pulse')
+        self.display(f'{self.id} started sending pulse')
         while True:
             if self.end:
                 break
@@ -51,9 +52,36 @@ class Mapper():
                 msg = pulseMessageObj.serialize()
                 pulse_socket.send(msg.encode("utf-8"))
             except Exception as e:
-                print(e)
+                self.display(e)
             finally:
                 pulse_socket.close()
+                
+                
+    def display(self, msg,p=False):
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(filename='mapper.log', level=logging.DEBUG)
+        logging.debug(
+            Fore.CYAN
+            + Style.BRIGHT
+            + "> Mapper-{"
+            + self.id
+            + "}......"
+            + Style.RESET_ALL
+            + Fore.YELLOW
+            + msg
+            + Style.RESET_ALL
+        )
+        
+        print(Fore.CYAN
+            + Style.BRIGHT
+            + "> Mapper-{"
+            + self.id
+            + "}......"
+            + Style.RESET_ALL
+            + Fore.YELLOW
+            + msg
+            + Style.RESET_ALL)
+                
                 
                 
     def sendDoneToMaster(self):
@@ -68,7 +96,7 @@ class Mapper():
             msg = doneMessageObj.serialize()
             done_socket.send(msg.encode("utf-8"))
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
                 done_socket.close()
                 
@@ -112,13 +140,13 @@ class Mapper():
             self.terminate()
                 
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
             master_socket.close()
           
           
     def terminate(self):
-        print(f'Terminating Mapper {self.id}')
+        self.display(f'Terminating Mapper {self.id}')
         self.end = True
         os.kill(os.getpid(), signal.SIGINT)
 
@@ -178,7 +206,7 @@ class Mapper():
                 msg = send_done_msg.serialize()
                 reducer_socket.send(msg.encode("utf-8"))
         except Exception as e:
-            print(e)
+            self.display(e)
         finally:
             reducer_socket.close()
             
@@ -211,7 +239,7 @@ class Mapper():
     
             
     def run(self):
-        print(f'spawned mapper with id {self.id}')
+        self.display(f'spawned mapper with id {self.id}')
         self.clearOutputBuffer()
         self.readConfig()
         thread= threading.Thread(target=self.sendPulseToMaster, args=())
@@ -220,7 +248,7 @@ class Mapper():
         listenthread.start()
         
         self.execute()
-        print(f'Mapping Done by {self.id}')
+        self.display(f'Mapping Done by {self.id}')
         self.sendDoneToMaster()
         
     
