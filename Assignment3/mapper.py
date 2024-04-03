@@ -38,6 +38,7 @@ class Mapper():
         '''
         Send the pulse signal to the Master
         '''
+        print(f'{self.id} started sending pulse')
         while True:
             if self.end:
                 break
@@ -116,7 +117,7 @@ class Mapper():
           
           
     def terminate(self):
-        print('Terminating Mapper '+self.id)
+        print(f'Terminating Mapper {self.id}')
         self.end = True
         os.kill(os.getpid(), signal.SIGINT)
 
@@ -193,7 +194,6 @@ class Mapper():
                 
                 
     def checkKill(self):
-        print('in CheckKill')
         if self.kill:
             self.end = True
             path = os.path.join(f"tests/{self.testCase}/home", "mappers",str(self.id), 'config.json')
@@ -205,11 +205,9 @@ class Mapper():
             os.kill(os.getpid(), signal.SIGINT)
         
     def clearOutputBuffer(self):
-        try:
-            with open(self.output_path, 'w') as file:
-                pass
-        finally:
-            file.close()
+        with open(self.output_path, 'w') as file:
+            pass
+    
             
     def run(self):
         print(f'spawned mapper with id {self.id}')
@@ -221,7 +219,7 @@ class Mapper():
         listenthread.start()
         
         self.execute()
-        
+        print(f'Mapping Done by {self.id}')
         self.sendDoneToMaster()
         
     

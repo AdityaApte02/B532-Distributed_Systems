@@ -34,7 +34,8 @@ class Reducer():
         '''
         Send the pulse signal to the Master
         '''
-        while not self.end:
+        print(f'{self.id} started sending pulse')
+        while True:
             if self.end:
                 break
             time.sleep(self.PULSE_INTERVAL)
@@ -66,7 +67,7 @@ class Reducer():
                 mapper_id = msg_list[1]
                 msg = msg_list[0]
                 if msg == "DONE_MAPPER_REDUCER":
-                    print(f'{mapper_id} is Done sending the Data')
+                    print(f'{mapper_id} is Done sending the Data to {self.id}')
                     self.mapper_dict[mapper_id] = True  
                 elif msg == "TERMINATE":
                     self.terminate()   
@@ -86,10 +87,8 @@ class Reducer():
     def execute(self):
         try:
             command = ["python", self.reduce_path, "<", self.input_path, ">", self.output_path]
-
             process = subprocess.Popen(command, shell=True)
             return_code = process.wait()
-            
             return return_code
         
         except Exception as e:
@@ -97,7 +96,7 @@ class Reducer():
             
     
     def terminate(self):
-        print('Terminating Reducer',self.id)
+        print(f'Terminating Reducer {self.id}')
         self.end = True
         os.kill(os.getpid(), signal.SIGINT)
     
@@ -120,10 +119,10 @@ class Reducer():
                 break
             self.mappersDone = all(self.mapper_dict[mapper] for mapper in self.mapper_dict)
             if self.mappersDone:
-                print('Start Reducing')
+                print(f'{self.id} Started Reducing')
                 time.sleep(1)
                 code = self.execute()
-                print('Done Executing')
+                print(f'{self.id} Done Reducing')
                 if code == 0:
                     time.sleep(1)
                     self.sendDoneToMaster()

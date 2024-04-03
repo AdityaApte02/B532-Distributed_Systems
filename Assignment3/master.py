@@ -118,7 +118,7 @@ class Master():
         '''
         Send a message to mappers to send data to the Reducers
         '''
-        print('Sending data to mapper')
+        print('Sending Request to Send to mappers')
         if self.mappersDone:
             for i in range(len(self.mappers)):
                 for j in range(len(self.reducers)):
@@ -198,8 +198,6 @@ class Master():
                     self.mappersDone = False
                     print(f"Mapper with id {mapper_id} is dead")
                     self.killMapper(mapper_id)  
-                else:
-                    print(f'Pulse from {mapper_id}')
             time.sleep(1)
             
             
@@ -211,10 +209,8 @@ class Master():
             for reducer_id, last_pulse_time in self.reducer_pulse_times.items():
                 current_time =  datetime.now().timestamp()
                 if abs(current_time - last_pulse_time) > self.TIMEOUT:
-                    print(f"Terminating Reducer with id{reducer_id}")
+                    print(f"Mapper with id {reducer_id} is dead")
                     self.killReducer()  
-                else:
-                    print(f'Pulse from {reducer_id}')
             time.sleep(1)
             
             
@@ -236,7 +232,6 @@ class Master():
         mapper = self.get_mapper_reducer(mapper_id, "mappers")
         process = multiprocessing.Process(target=self.handle_mappers, args=(mapper,))
         process.start()
-        print(f'Respawned the mapper with id {mapper_id}')
      
             
         
